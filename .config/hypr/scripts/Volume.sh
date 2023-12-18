@@ -1,4 +1,4 @@
-/bash
+#!/bin/bash
 
 iDIR="$HOME/.config/dunst/icons"
 
