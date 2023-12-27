@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+echo_json() {
+        echo "{ \"charging\": $ac }"
+}
+
+[ $(cat /sys/class/power_supply/AC0/online) -eq 0 ] && ac=false || ac=true
+echo_json
+
+acpi_listen | while read -r line; do
+    { echo $line | rg ac_adapter > /dev/null; } && \
+            { { echo $line | rg "ac_adapter .* 00000001" > /dev/null; } && ac=true || ac=false; }
+
+                echo_json
+                done
+
+                
+}
