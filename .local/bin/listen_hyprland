@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+active_workspace() {
+    hyprctl monitors | rg "e w" | cut -d\  -f3
+}
+
+query_workspaces() {
+    ws=$(hyprctl workspaces | rg "^w" | cut -d\  -f3 | sort -n | sed -z "s/\n/, /g") 
+    ws="{ \"ids\": [${ws::-2}], \"active\": \"$1\" }"
+}
+
+# Output current state
+echo_json() {
+    echo "{ \"workspaces\": $ws, \"active_title\": \"$title\" }"
+}
+
+# Obtain and output initial state
+query_workspaces $(active_workspace)
+title=$(hyprctl activewindow | rg "title" | cut -d: -f2 | tail -c+2)
+echo_json
+
+sock="UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
+socat -u $sock - | while read -r line; do 
+    case $line in
+    workspace*)
+        query_workspaces ${line:11}
+        ;;
+    createworkspace*)
+        query_workspaces $(active_workspace)
+        ;;
+    destroyworkspace*)
+        # For some reason, hyprctl sometimes won't update fast enough on the workspace event
+        w="${line:18}"
+        ws=$(echo "$ws" | sed "s/, $w//g" | sed "s/$w, //g")
+        ;;
+    focusedmon*)
+        query_workspaces $(echo "$line" | cut -d, -f2)
+        ;;
+    activewindow\>*)
+        # That first sed replaces literal '\' with a literal '\\\\', escaped twice since JSON and eww decoding remove one layer each
+        title=$(echo "$line" | rg -o ",.*" | tail -c+2 | sed "s/\\\\/\\\\\\\\\\\\\\\\/g" | sed "s/\"/\\\\\"/g")
+        echo $line
+        ;;
+    esac
+
+    echo_json
+done
+
