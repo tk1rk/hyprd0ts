@@ -1,0 +1,151 @@
+{
+    "height": 35,
+    "width": 2736,
+    "layer": "top",
+    "position": "top",
+    "mod": "dock",
+    "exclusive": true,
+    "passtrough": false,
+    "gtk-layer-shell": true,
+    "modules-left": ["custom/launcher", "custom/weather", "hyprland/window"],
+    "modules-middle": ["hyprland/workspaces"]
+    "modules-right": ["network", "pulseaudio",  "backlight", "battery", "tray", "custom/lock", "clock", "custom/power-menu"],
+
+    "hyprland/workspaces": {
+      "active-only": false, 
+      "all-outputs": true, 
+      "disable-scroll": false, 
+      "on-scroll-up": "hyprctl dispatch workspace -1", 
+      "on-scroll-down": "hyprctl dispatch workspace +1",
+      "format": "{icon}",
+      "on-click": "activate",
+      "format-icons": {
+        "active": "󰮯",
+        "default": ""
+      },
+      "persistent-workspaces":{
+        "1": [
+          "eDP-1"
+        ],
+        "2": [
+          "eDP-1"
+        ],
+        "3": [
+          "eDP-1"
+        ],
+        "4": [
+          "eDP-1"
+        ]
+      },
+    },
+    "hyprland/window": {
+      "format": "👉 {}",
+      "max-length": 200,
+      "separate-outputs": true
+    },
+    "tray": {
+      "spacing": 10,
+      "icon-size": 22
+    },
+    "clock": {
+      "format": "{:%H:%M}",
+      "format-alt": "{:%b %d %Y}",
+      "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    "backlight": {
+      "device": "eDP-1",
+      "format": "{percent}% {icon}",
+      "tooltip-format": "{percent}",
+      "format-icons": ["󱩎 ", "󱩏 ", "󱩐 ", "󱩑 ", "󱩒 ", "󱩓 ", "󱩔 ", "󱩕 ", "󱩖 ", "󰛨 "]
+    },
+    "network": {
+      /* "format-wifi": "直", */
+      "format-wifi": "<span foreground=#1793d1">{icon}</span>",
+      "format-ethernet": "<span foreground=#1793d1></span> ",
+      "format-disconnected": "<span foreground=#f8f8f2>睊</span>",
+      "tooltip-format": "{essid}",
+      "on-click": "~/.config/waybar/scripts/network/rofi-network-manager.sh",
+      "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
+    },
+    "bluetooth": {
+      "format": "<span foreground= #1793d1> {status}</span>",
+	   "format-connected": "<span foreground= #1793d1> {device_alias}</span>",
+	   "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+	// "format-device-preference": [ "device1",   "device2" ], // preference list deciding the displayed device
+	   "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+	   "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+	   "tooltip-format-enumerate-connected":"{device_alias}\t{device_address}",
+	   "tooltip-format-enumerate-connected-battery":"{device_alias}\t{device_address}\t{device_battery_percentage}%"
+    },
+   
+    
+    "pulseaudio": {
+      "format": "<span foreground= #8be9fd>{icon}</span>",
+      "format-muted": "<span foreground= #f8f8f2>婢</span>",
+      "format-icons": {
+        "default": ["", "", "墳"]
+      },
+      "on-click": "pavucontrol &"
+    },
+    "battery": {
+      "bat": "BAT0",
+      "adapter": "ADP0",
+      "interval": 60,
+      "states": {
+        "warning": 30,
+        "critical": 15
+      },
+      "max-length": 20,
+      "format": "{icon} ",
+      "format-warning": "<span foreground= #f1fa8c>{icon}</span>",
+      "format-critical": "<span foreground= #ff5555>{icon9}</span>",
+      "format-charging": "<span foreground=#50fa7b></span>",
+      "format-plugged": "<span foreground= #50fa7b>ﮣ</span>", 
+
+      "format-alt": "{icon} {time}",
+      "format-full": "<span foreground= #59fa7b>ﮣ</span>", 
+      "format-icons": ["󱊡", "󱊢", "󱊣"]
+    },
+    "custom/notification": {
+		  "tooltip": true,
+		  "format": " {icon} ",
+      "format-icons": {
+		    "notification": "",
+			   "none": "",
+			   "dnd-notification": "",
+			   "dnd-none": ""
+		  },
+		  "return-type": "json",
+		  "exec-if": "which swaync-client",
+		  "exec": "swaync-client -swb",
+		  "on-click": "swaync-client -t -sw",
+		  "on-click-right": "swaync-client -d -sw",
+		  "escape": true
+	  },
+    "custom/weather": {
+      "exec": "python3 ~/.config/waybar/scripts/weather.py",
+      "restart-interval": 300,
+      "return-type": "json"
+    },   
+    "custom/lock": {
+      "tooltip" : false,
+      "on-click": "swaylock",
+      "format" : "<span foreground= #ff5555></span>"
+    },
+    "custom/spotify": {
+      "exec": "python3 ~/.config/waybar/scripts/mediaplayer.py --player spotify",
+      "format": "<span foreground=#50fa7b> {}</span>",
+      "return-type": "json",
+      "on-click": "playerctl play-pause",
+      "on-double-click-right": "playerctl next",
+      "on-scroll-down": "playerctl previous"
+    },
+    "custom/power-menu": {
+      "format": "<span foreground=#f8f8f2>💀<span/>";,
+      "on-click": "bash ~/.config/waybar/scripts/power-menu/powermenu.sh &",
+    }, 
+    "custom/launcher": {
+      "format": "<span foreground= ##1793d1></span>",
+      "on-click": "rofi -show drun -theme /home/tk/.config/rofi/launchers/apps/launcher.rasi &"
+    },
+}
