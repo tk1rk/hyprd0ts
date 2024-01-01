@@ -41,7 +41,9 @@
     "hyprland/window": {
       "format": "👉 {}",
       "max-length": 200,
-      "separate-outputs": true
+      "separate-outputs": true,
+      "on-click-right": "sleep .3 && ~/.config/hypr/resize.sh",
+      "on-click-middle": "hyprctl dispatch killactive"
     },
     "tray": {
       "spacing": 10,
