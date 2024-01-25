@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
-CONFIG="$HOME/.config/mako/config"
+CONFIG="$HOME/.config/dunst/dunstrc"
 
-if [[ ! `pidof mako` ]]; then
-	mako --config ${CONFIG}
+if [[ ! `pidof dunst` ]]; then
+	dunst --config ${CONFIG}
 fi
