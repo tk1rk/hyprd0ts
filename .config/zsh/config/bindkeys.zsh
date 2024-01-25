@@ -1,25 +1,51 @@
-# Bindkeys
-#
+#!/usr/bin/env zsh
 
-autoload up-line-or-beginning-search down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
+# create a zkbd compatible hash;
+# to add other keys to this hash, see: man 5 terminfo
+typeset -g -A key
 
-bindkey -v
-[[ -n "$terminfo[kpp]"   ]] && bindkey "$terminfo[kpp]"   up-line-or-beginning-search   # PAGE UP
-[[ -n "$terminfo[knp]"   ]] && bindkey "$terminfo[knp]"   down-line-or-beginning-search # PAGE DOWN
-[[ -n "$terminfo[khome]" ]] && bindkey "$terminfo[khome]" beginning-of-line             # HOME
-[[ -n "$terminfo[kend]"  ]] && bindkey "$terminfo[kend]"  end-of-line                   # END
-[[ -n "$terminfo[kdch1]" ]] && bindkey "$terminfo[kdch1]" delete-char                   # DELETE
-[[ -n "$terminfo[kbs]"   ]] && bindkey "$terminfo[kbs]"   backward-delete-char          # BACKSPACE
+### History Substring Search ###
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
 
-zflai-assert "${+terminfo[kpp]}${+terminfo[knp]}${+terminfo[khome]}${+terminfo[kend]}" "1111" "terminfo test" "[zshrc] "
 
-bindkey "^A"      beginning-of-line     "^E"      end-of-line
-bindkey "^?"      backward-delete-char  "^H"      backward-delete-char
-bindkey "^W"      backward-kill-word    "\e[1~"   beginning-of-line
-bindkey "\e[7~"   beginning-of-line     "\e[H"    beginning-of-line
-bindkey "\e[4~"   end-of-line           "\e[8~"   end-of-line
-bindkey "\e[F"    end-of-line           "\e[3~"   delete-char
-bindkey "^J"      accept-line           "^M"      accept-line
-bindkey "^T"      accept-line           "^R"      history-incremental-search-backward
+key[Home]="${terminfo[khome]}"
+key[End]="${terminfo[kend]}"
+key[Insert]="${terminfo[kich1]}"
+key[Backspace]="${terminfo[kbs]}"
+key[Delete]="${terminfo[kdch1]}"
+key[Up]="${terminfo[kcuu1]}"
+key[Down]="${terminfo[kcud1]}"
+key[Left]="${terminfo[kcub1]}"
+key[Right]="${terminfo[kcuf1]}"
+key[PageUp]="${terminfo[kpp]}"
+key[PageDown]="${terminfo[knp]}"
+key[Shift-Tab]="${terminfo[kcbt]}"
+
+
+# setup key accordingly
+[[ -n "${key[Home]}"      ]] && bindkey -- "${key[Home]}"       beginning-of-line
+[[ -n "${key[End]}"       ]] && bindkey -- "${key[End]}"        end-of-line
+[[ -n "${key[Insert]}"    ]] && bindkey -- "${key[Insert]}"     overwrite-mode
+[[ -n "${key[Backspace]}" ]] && bindkey -- "${key[Backspace]}"  backward-delete-char
+[[ -n "${key[Delete]}"    ]] && bindkey -- "${key[Delete]}"     delete-char
+[[ -n "${key[Up]}"        ]] && bindkey -- "${key[Up]}"         up-line-or-history
+[[ -n "${key[Down]}"      ]] && bindkey -- "${key[Down]}"       down-line-or-history
+[[ -n "${key[Left]}"      ]] && bindkey -- "${key[Left]}"       backward-char
+[[ -n "${key[Right]}"     ]] && bindkey -- "${key[Right]}"      forward-char
+[[ -n "${key[PageUp]}"    ]] && bindkey -- "${key[PageUp]}"     beginning-of-buffer-or-history
+[[ -n "${key[PageDown]}"  ]] && bindkey -- "${key[PageDown]}"   end-of-buffer-or-history
+[[ -n "${key[Shift-Tab]}" ]] && bindkey -- "${key[Shift-Tab]}"  reverse-menu-complete
+
+# Finally, make sure the terminal is in application mode, when zle is
+# active. Only then are the values from $terminfo valid.
+if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
+	autoload -Uz add-zle-hook-widget
+	function zle_application_mode_start { echoti smkx }
+	function zle_application_mode_stop { echoti rmkx }
+	add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
+	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
+fi
+
