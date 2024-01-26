@@ -55,6 +55,7 @@ zstyle ':completion:*' rehash true
 #zstyle ':completion:::::'	completer _force_rehash _complete _approximate
 
 # Group matches and describe.
+bindkey -M menuselect '^o' accept-and-infer-next-history
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*:matches' group 'yes'
 zstyle ':completion:*:options' description 'yes'
