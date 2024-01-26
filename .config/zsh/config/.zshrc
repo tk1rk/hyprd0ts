@@ -102,13 +102,16 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # --- completion ---
 autoload -Uz compinit
-comp_cache=${zsh_cache}/zcompdump-${ZSH_VERSION}
+comp_cache=$HOME/.cache/zsh/.zcompdump
 compinit -d ${comp_cache}
 [[ ${comp_cache}.zwc -nt ${comp_cache} ]] || zcompile -R -- "${comp_cache}".zwc "${comp_cache}" # compile completion  cache
 zstyle ':completion:*' cache-path ${zsh_cache} # cache path
 zstyle ':completion:*' menu select # select completions with arrow keys
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS} # use ls colors
-zstyle ':completion:*' completer _complete # approximate completion matches
+zstyle ':completion:*' completer _complete _match _approximate
+zstyle ':completion:*:match:*' original only
+zstyle -e ':completion:*:approximate:*' \
+  max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|=* r:|=*' # case insensitive, partial word, substring
 zstyle ':completion::complete:*' use-cache 1 # use cache
 zstyle ':completion:*:git-checkout:*' sort false # don't sort git checkout
@@ -213,6 +216,25 @@ path=(
   # add more directories to the path if you want
   $path
 )
+
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='underline'
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND=''
+zle -N history-substring-search-up
+zle -N history-substring-search-down
+bindkey '^[OA' history-substring-search-up
+bindkey '^[OB' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-sea
+
+# Add snap binary and desktop directories to environment {{{1
+
+if whence -w snap &> /dev/null && [[ -f /etc/profile.d/apps-bin-path.sh ]]; then
+  if [[ ! $PATH == */snap/bin* ]] || [[ ! $XDG_DATA_DIRS == */snapd/* ]]; then
+    emulate sh
+    source /etc/profile.d/apps-bin-path.sh
+    emulate zsh
+  fi
+fi
 
 # --- source various other scripts ---
 # source ${ZDOTDIR:-$HOME}/.aliases
