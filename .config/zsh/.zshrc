@@ -15,6 +15,13 @@ tr=34:\
 tw=35:\
 tx=36:"
 
+# # configure nvim as manpager (requires neovim-remote)
+if [ -n "${NVIM_LISTEN_ADDRESS+x}" ] || [ -n "${NVIM+x}" ]; then
+    export MANPAGER="nvr -c 'Man!' -o -"
+  else
+    export MANPAGER="nvim -c 'Man!'"
+fi
+
 # completions
 autoload -Uz compinit
 zstyle ':completion:*' menu yes select
