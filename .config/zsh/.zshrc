@@ -1,3 +1,41 @@
+
+
+# ZAP
+ZAP_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/zap"
+if [[ ! ${ZAP_DIR} ]]; then
+    command zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
+fi
+
+# theme
+plug "romkatv/powerlevel10k"
+
+# zap plugins
+plug "zap-zsh/supercharge"
+plug "zap-zsh/completions"
+plug "zap-zsh/sudo"
+plug "zap-zsh/nvm"
+
+# zsh-users plugins
+plug "zsh-users/zsh-autosuggestions"
+plug "zsh-users/zsh-completions"
+plug "zsh-users/zsh-history-substring-search"
+
+# z-shell plugins
+plug "z-shell/F-Sy-H"
+plug "z-shell/zsh-eza"
+plug "z-shell/zsh-diff-so-fancy"
+plug "z-shell/zsh-fancy-completions"
+plug "z-shell/zui"
+plug "z-shell/zbrowse"
+plug "z-shell/zsh-lint"
+plug "z-shell/H-S-MW"
+plug "z-shell/zsh-startify"
+
+# zd (zi docker)
+#docker run --rm -it ghcr.io/z-shell/zd:latest
+
+
+
 export EXA_COLORS="\
 uu=36:\
 gu=37:\
@@ -17,22 +55,10 @@ tx=36:"
 
 # # configure nvim as manpager (requires neovim-remote)
 if [ -n "${NVIM_LISTEN_ADDRESS+x}" ] || [ -n "${NVIM+x}" ]; then
-    export MANPAGER="nvr -c 'Man!' -o -"
+    export MANPAGER="nvim -c 'Man!' -o -"
   else
     export MANPAGER="nvim -c 'Man!'"
 fi
-
-# completions
-autoload -Uz compinit
-zstyle ':completion:*' menu yes select
-zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
-zmodload -i zsh/complist
-_comp_options+=(globdots)		# Include hidden files.
-zle_highlight=('paste:none')
-for dump in "$HOME/.cache/zsh/.zcompdump"(N.mh+24); do
-  compinit
-done
-compinit -
 
 # Automatically load bash completion functions
 autoload -U +X bashcompinit && bashcompinit
@@ -62,7 +88,7 @@ zstyle ':completion:*' rehash true
 #zstyle ':completion:::::'	completer _force_rehash _complete _approximate
 
 # Group matches and describe.
-bindkey -M menuselect '^o' accept-and-infer-next-history
+bindkey -M menuselect '^I' accept-and-infer-next-history
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*:matches' group 'yes'
 zstyle ':completion:*:options' description 'yes'
