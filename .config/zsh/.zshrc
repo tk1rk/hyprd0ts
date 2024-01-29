@@ -23,42 +23,13 @@ plug "zsh-users/zsh-history-substring-search"
 # z-shell plugins
 plug "z-shell/F-Sy-H"
 plug "z-shell/zsh-eza"
-plug "z-shell/zsh-diff-so-fancy"
 plug "z-shell/zsh-fancy-completions"
-plug "z-shell/zui"
-plug "z-shell/zbrowse"
-plug "z-shell/zsh-lint"
 plug "z-shell/H-S-MW"
-plug "z-shell/zsh-startify"
 
 # zd (zi docker)
 #docker run --rm -it ghcr.io/z-shell/zd:latest
 
 
-
-export EXA_COLORS="\
-uu=36:\
-gu=37:\
-sn=32:\
-sb=32:\
-da=34:\
-ur=34:\
-uw=35:\
-ux=36:\
-ue=36:\
-gr=34:\
-gw=35:\
-gx=36:\
-tr=34:\
-tw=35:\
-tx=36:"
-
-# # configure nvim as manpager (requires neovim-remote)
-if [ -n "${NVIM_LISTEN_ADDRESS+x}" ] || [ -n "${NVIM+x}" ]; then
-    export MANPAGER="nvim -c 'Man!' -o -"
-  else
-    export MANPAGER="nvim -c 'Man!'"
-fi
 
 # Automatically load bash completion functions
 autoload -U +X bashcompinit && bashcompinit
