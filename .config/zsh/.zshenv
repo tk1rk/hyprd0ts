@@ -24,17 +24,31 @@ export EDITOR="nvim"
 export SUDO_EDITOR="nvim"
 export VISUAL="nvim"
 export PAGER="nvim +Man!"
-export MANPAGER="nvim +Man!"     
 export BROWSER="vivaldi-stable"
 
-# Man pages color support
-export LESS_TERMCAP_mb=$'\e[1;32m'
-export LESS_TERMCAP_md=$'\e[1;32m'
-export LESS_TERMCAP_me=$'\e[0m'
-export LESS_TERMCAP_se=$'\e[0m'
-export LESS_TERMCAP_so=$'\e[01;33m'
-export LESS_TERMCAP_ue=$'\e[0m'
-export LESS_TERMCAP_us=$'\e[1;4;31m'
+export EXA_COLORS="\
+uu=36:\
+gu=37:\
+sn=32:\
+sb=32:\
+da=34:\
+ur=34:\
+uw=35:\
+ux=36:\
+ue=36:\
+gr=34:\
+gw=35:\
+gx=36:\
+tr=34:\
+tw=35:\
+tx=36:"
+
+# # configure nvim as manpager (requires neovim-remote)
+if [ -n "${NVIM_LISTEN_ADDRESS+x}" ] || [ -n "${NVIM+x}" ]; then
+    export MANPAGER="nvim -c 'Man!' -o -"
+  else
+    export MANPAGER="nvim -c 'Man!'"
+fi
 
 ### Path ###
 path+=("$HOME/.local/bin")
