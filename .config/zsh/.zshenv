@@ -13,12 +13,10 @@ export XDG_PICTURES_HOME="$HOME/Pictures"
 
 #### ZSH
 export ZDOTDIR="$HOME/.config/zsh"
-export ZSH_CACHE_DIR="$HOME/.cache/zsh"
-export ZSH_PLUGINS="$HOME/.config/zsh/plugins"
-export ZSH_COMPLETIONS="$HOME/.cache/zsh/completions"
+export ZSH_CACHE="$HOME/.cache/zsh"
 
 ### Create cache and completions dir and add to $fpath ###
-fpath=("$HOME/.cache/zsh/completions" $fpath)
+fpath+=('$HOME/.cache/zsh/completions')
 _comp_options+=(globdots)
 
 # Editor + Others
@@ -63,9 +61,6 @@ export RIPGREP_CONFIG_PATH="$HOME/.rgrc"
 
 # neofetch-btw
 neofetch
-
-# starship
-eval "$(starship init zsh)"
 
 # bat
 export BAT_THEME="Dracula"
