@@ -28,8 +28,9 @@ plug "z-shell/H-S-MW"
 
 # local sources
 plug "$ZDOTDIR/config/aliases.zsh"
-plug "$ZDOTDIR/config/functions.zsh"
 plug "$ZDOTDIR/config/autosuggestions.zsh"
+plug "$ZDOTDIR/config/bindkeys.zsh"
+plug "$ZDOTDIR/config/functions.zsh"
 
 # zd (zi docker)
 #docker run --rm -it ghcr.io/z-shell/zd:latest
