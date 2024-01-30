@@ -1,25 +1,32 @@
 #!/bin/bash
 
 # usage: import gtk-3.0 setting
-config="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-3.0/settings.ini"
-if [ ! -f "$config" ]; then exit 1; fi
+config="${XDG_CONFIG_HOME}/gtk-3.0/settings.ini"
+if [ ! -f "$config" ]; then 
+    exit 1; 
+fi
 
-## Set GTK Themes, Icons, Cursor and Fonts
-
+# Set GTK Themes, Icons, Cursor and Fonts
 THEME='Dracula'
 ICONS='Papirus-Dark'
 FONT='MesloLGS Nerd Font 12'
+DOC_FONT='MesloLGS Nerd Font 12'
+MONO_FONT='MesloLGS Nerd Font 12'
 CURSOR='ArchCursorComplete'
 CURSOR_SIZE='24'
 
 SCHEMA='gsettings set org.gnome.desktop.interface'
 
 apply_themes() {
-  ${SCHEMA} gtk-theme "$THEME"
-  ${SCHEMA} icon-theme "$ICONS"
-  ${SCHEMA} cursor-theme "$CURSOR"
-  ${SCHEMA} cursor-size "$CURSOR_SIZE"
-  ${SCHEMA} font-name "$FONT"
+  ${SCHEMA} gtk-theme ${THEME}
+  ${SCHEMA} icon-theme ${ICONS}
+  ${SCHEMA} cursor-theme ${CURSOR}
+  ${SCHEMA} cursor-size ${CURSOR_SIZE}
+  ${SCHEMA} font-name ${FONT}
+  ${SCHEMA} document-font-name ${DOC_FONT}
+  ${SCHEMA} monospace-font-name ${MONO_FONT}
+  ${SCHEMA} menus-have-icons true
+  ${SCHEMA} enable-animations true
 }
 
 apply_themes
