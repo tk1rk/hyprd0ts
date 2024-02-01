@@ -1,90 +1,99 @@
 [alias]
-    a = add
-    aa = add -A
-    b = branch
-    ba = branch -a
-    c = commit -m
-    ca = commit -am
-    co = checkout
-    contributors = shortlog -nse
-    d = diff --patch-with-stat
-    df = diff --patch-with-stat --color-words
-    ds = diff --patch-with-stat --staged
-    dt = difftool
-    dts = difftool --staged
-    fc = "!f() { git log --pretty='%C(yellow)%h%Creset -%Cred%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --grep=$1; }; f"
-    fs = "!f() { git log --pretty='%C(yellow)%h%Creset -%Cred%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' -S$1; }; f"
-    lg = log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
-    pull-dir = "!find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \\;"
-    remotes = remote -v
-    s = status -sb
-    sclone = clone --depth 1
-    undo = reset HEAD~1
+  a = add
+  aa = add -A
+  b = branch
+  ba = branch -a
+  c = commit -m
+  ca = commit -am
+  co = checkout
+  contributors = shortlog -nse
+  d = diff --patch-with-stat
+  df = diff --patch-with-stat --color-words
+  ds = diff --patch-with-stat --staged
+  dt = difftool
+  dts = difftool --staged
+  fc = "!f() { git log --pretty='%C(yellow)%h%Creset -%Cred%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --grep=$1; }; f"
+  fs = "!f() { git log --pretty='%C(yellow)%h%Creset -%Cred%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' -S$1; }; f"
+  lg = log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
+  pull-dir = "!find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \\;"
+  remotes = remote -v
+  s = status -sb
+  sclone = clone --depth 1
+  undo = reset HEAD~1
 
 [user]
-    email = taylor.kirk@pm.me
-    name = Taylor Kirk
-    signingKey = 
+  email = taylor.kirk@pm.me
+  name = Taylor Kirk
+  signingKey = 
 
 [core]
-    editor = neovim
-    autocrlf = false
+  pager = delta
+  editor = neovim
+  autocrlf = false
 
 [push]
-    default = simple
+  default = simple
 
 [pull]
-    ff = only
+  ff = only
 
 [merge]
-    tool = vimdiff
+  tool = diff-so-fancy
+  conflictstyle = diff3
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  navigate = true    # use n and N to move between diff sections
+  light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
 
 [commit]
-    gpgSign = true
+  gpgSign = true
 
 [color]
-    ui = always
-    diff = always
+  ui = always
+  diff = always
 
 [color "diff"]
-    meta = yellow bold
-    commit = cyan bold
-    frag = magenta bold
-    old = red bold
-    new = green bold
-    whitespace = red reverse
+  meta = yellow bold
+  commit = cyan bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+  whitespace = red reverse
 
 [color "diff-highlight"]
-    oldNormal = red bold
-    oldHighlight = red bold 52
-    newNormal = green bold
-    newHighlight = green bold 22
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
 
 [color "branch"]
-    current = yellow reverse
-    local = yellow
-    remote = green
+  current = yellow reverse
+  local = yellow
+  remote = green
 
 [color "status"]
-    added = green
-    changed = yellow
-    untracked = red
+  added = green
+  changed = yellow
+  untracked = red
 
 [pager]
-    diff = diff-so-fancy | less --tabs=4 -RFX
-    show = diff-so-fancy | less --tabs=4 -RFX
+  diff = diff-so-fancy | less --tabs=2 -RFX
+  show = diff-so-fancy | less --tabs=2 -RFX
 
 [gpg]
-    program = gpg
+  program = gpg
 
 [url "git@github.com:"]
-    insteadOf = "gh:"
-    pushInsteadOf = "gh:"
+  insteadOf = "gh:"
+  pushInsteadOf = "gh:"
 
 [url "git@gist.github.com:"]
-    insteadOf = "gist:"
-    pushInsteadOf = "gist:"
+  insteadOf = "gist:"
+  pushInsteadOf = "gist:"
 
 [url "git@gitlab.com:"]
-    insteadOf = "gl:"
-    pushInsteadOf = "gl:"
+  insteadOf = "gl:"
+  pushInsteadOf = "gl:"
