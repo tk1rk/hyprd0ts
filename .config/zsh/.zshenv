@@ -1,14 +1,20 @@
 #!/usr/bin/env zsh
 
 #### xdg
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_CONFIG_HOME=${HOME}/.config
+export XDG_CACHE_HOME=${HOME}/.cache
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_DOWNLOADS_HOME="$HOME/Downloads"
 export XDG_DOCUMENTS_HOME="$HOME/Documents"
 export XDG_MUSIC_HOME="$HOME/Music"
 export XDG_PICTURES_HOME="$HOME/Pictures"
+
+# locale
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US
+export LC_MONETARY=en_US.UTF-8
+export LC_TIME=en_US.UTF-8
 
 #### ZSH
 export ZDOTDIR="$HOME/.config/zsh"
