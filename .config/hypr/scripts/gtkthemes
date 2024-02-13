@@ -16,8 +16,9 @@ CURSOR='ArchCursorComplete'
 CURSOR_SIZE='24'
 
 SCHEMA='gsettings set org.gnome.desktop.interface'
-
+SCHEMA.wm='gsettings set org.gnome.desktop.wm.preferences theme 
 apply_themes() {
+  ${SCHEMA.wm} theme ${THEME} 
   ${SCHEMA} gtk-theme ${THEME}
   ${SCHEMA} icon-theme ${ICONS}
   ${SCHEMA} cursor-theme ${CURSOR}
