@@ -1,9 +1,9 @@
 
-desktop-image: "background.png"
+desktop-image: "pacman.png"
 
 title-text: ""
 message-font: "DejaVu Sans Regular 16"
-message-color: "#eff0f1"
+message-color: "#f8f8f2"
 terminal-font: "DejaVu Sans Regular 16"
 terminal-box: "terminal_*.png"
 
@@ -16,9 +16,9 @@ terminal-box: "terminal_*.png"
   height = 31
   show_text = false
   text = ""
-  fg_color = "#3daee9"
-  bg_color = "#31363b"
-  border_color = "#31363b"
+  fg_color = "#50fa7b"
+  bg_color = "#44475a"
+  border_color = "#bd93f9"
   bar_style = "progress_bar_*.png"
   highlight_style = "progress_highlight_*.png"
 }
@@ -29,22 +29,22 @@ terminal-box: "terminal_*.png"
   top = 20%
   height = 70%
 
-  #menu_pixmap_style = "boot_menu_*.png"
+  menu_pixmap_style = "boot_menu_*.png"
 
   item_font = "DejaVu Sans Regular 24"
-  item_color = "#eff0f1"
+  item_color = "#f8f8f2"
   item_height = 55
-#  item_icon_space = 10
+  item_icon_space = 10
   item_padding = 0
   item_spacing = 55
   
- selected_item_font = "DejaVu Sans Regular 24"
-  selected_item_color= "#ffffff"
-  selected_item_color = "#ffffff"
+  selected_item_font = "DejaVu Sans Regular 24"
+  selected_item_color= "#f8f8f2"
+  selected_item_color = "#f8f8f2"
   selected_item_pixmap_style = "select_*.png"
 
-#  icon_height = 40
-#  icon_width = 40
+  icon_height = 40
+  icon_width = 40
 
   scrollbar = false
 }
