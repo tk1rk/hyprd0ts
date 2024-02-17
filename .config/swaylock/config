@@ -1,7 +1,7 @@
 daemonize
 show-failed-attempts
 clock
-screenshot
+image=$HOME/.config/swaylock/background.png
 effect-blur=13x13
 effect-vignette=0.5:0.5
 color=6272A4
