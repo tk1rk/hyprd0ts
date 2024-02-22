@@ -1,10 +1,9 @@
 #!/bin/zsh
 
-# ZAP
-ZAP_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/zap"
-if [[ ! ${ZAP_DIR} ]]; then
-    command zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
-fi
+# sources
+source ${ZDOTDIR}/conf.d/aliases.zsh
+source ${ZDOTDIR}/conf.d/functions.zsh
+source ${ZDOTDIR}/conf.d/predict.zsh
 
 # theme
 plug "romkatv/powerlevel10k"
