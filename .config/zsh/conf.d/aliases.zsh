@@ -9,11 +9,13 @@ alias ls='eza -lA --header --icons=always --color=always --color-scale --color-s
 
 ### CAT & LESS
 command -v bat > /dev/null && \
-        alias bat='bat --theme=ansi' && \
-        alias cat='bat --pager=never' && \
-        alias less='bat'
-# in debian the command is batcat
-command -v batcat > /dev/null && \
-        alias batcat='batcat --theme=ansi' && \
-        alias cat='batcat --pager=never' && \
-        alias less='batcat'
+        alias bat='bat --theme=Dracula' && \
+        alias cat='bat --pager=never --theme=Dracula' && \
+        alias less='bat --theme=Dracula'
+
+# bathelp
+alias bathelp='bat --plain --language=help'
+function help() {
+    "$@" --help 2>&1 | bathelp
+}
+
