@@ -1,8 +1,9 @@
 {
     "height": 35,
-    "width": 2736,
+    "width": 95%,
     "layer": "top",
     "position": "top",
+    "reload_style_on_change": 1,
     "mod": "dock",
     "exclusive": true,
     "passtrough": false,
