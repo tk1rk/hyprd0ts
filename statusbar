@@ -1,0 +1,13 @@
+#!/bin/bash
+
+CONFIG='$HOME/.config/waybar/config.jsonc'
+THEME='$HOME/.config/waybar/style.css'
+
+# Terminate already running mako instances
+killall -q waybar
+
+# Wait until the processes have been shut down
+while pgrep -u $UID -x waybar >/dev/null; do sleep 1; done
+
+# Launch mako
+waybar --config ${CONFIG} --theme ${THEME}
