@@ -14,12 +14,12 @@ nwg-drawer \
 	-is 84 \
 	-nocats \
 	-o 'Hyprland' \
-	-pbexit 'hyprctl exit' \
+	-pbexit 'hyprctl dispatch exit' \
 	-pblock 'hyprlock' \
 	-pbpoweroff 'systemctl poweroff' \
 	-pbreboot 'systemctl reboot' \
-	-pbsize 84 \
+	-pbsize 48 \
 	-pbsleep 'hypridle' \
 	-s "drawer.css" \
-	-spacing 50 \
-	-wm 'hyprctl dispatch exec "$@"'
+	-spacing 1em 1.5em 
+	
