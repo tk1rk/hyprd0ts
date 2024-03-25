@@ -1,4 +1,4 @@
 #!/usr/bin/ash
 
-export ZDOTDIR=$HOME/.config/zsh
+ZDOTDIR='$HOME/.config/zsh'
 [[ -f $ZDOTDIR/.zshrc ]] && source $ZDOTDIR/.zshrc
