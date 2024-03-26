@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # Current Theme
-dir="~/.config/waybar/scripts/powermenu/"
-theme='style'
+dir="~/.config/rofi/launchers/powermenu/"
+theme='powermenu'
 
 # CMDs
 uptime="`uptime -p | sed -e 's/up //g'`"
