@@ -1,3 +1,7 @@
+-- Example using a list of specs with the default options
+vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
+vim.g.maplocalleader = " " -- Same for `maplocalleader`
+
 -- vim:foldmethod=marker
 ---@diagnostic disable: different-requires
 -- Automatically download lazy.nvim if it doesn't exist
@@ -15,9 +19,12 @@ end
 
 vim.opt.runtimepath:prepend(lazypath)
 
-local lazy = require "lazy"
-
-lazy.setup({
+require("lazy").setup({
+  {  
+    "folke/which-key.nvim",
+    { "folke/neoconf.nvim", cmd = "Neoconf" },
+    "folke/neodev.nvim",
+  },
   -- Core {{{
   {
     "neovim/nvim-lspconfig",
@@ -96,19 +103,6 @@ lazy.setup({
   },
 
   {
-    "linty-org/key-menu.nvim",
-    enabled = false,
-    -- Alternative to which-key.nvim
-  },
-
-  {
-    "b0o/mapx.nvim",
-    enabled = false,
-    -- Plugin organize keymaps
-    -- Disable because lots of refactorings needs to be done
-  },
-
-  {
     "ii14/emmylua-nvim",
     lazy = true,
   },
@@ -152,11 +146,6 @@ lazy.setup({
   },
 
   {
-    "rafamadriz/friendly-snippets",
-    enabled = false,
-  },
-
-  {
     "numToStr/Comment.nvim",
     config = function()
       require "edit.comment"
@@ -180,29 +169,13 @@ lazy.setup({
   },
 
   {
-    "brymer-meneses/grammar-guard.nvim",
-    enabled = false,
-    -- Now grammar check is provided by ltex languages server
-  },
-
-  {
     "windwp/nvim-autopairs",
     config = function()
       require "edit.autopairs"
     end,
     event = "VeryLazy",
   },
-
-  {
-    "dhruvasagar/vim-table-mode",
-    ft = { "markdown", "org" },
-  },
-
-  {
-    "ekickx/clipboard-image.nvim",
-    enabled = false,
-  },
-
+    
   {
     "ThePrimeagen/refactoring.nvim",
     config = function()
@@ -212,31 +185,16 @@ lazy.setup({
       { "nvim-lua/plenary.nvim" },
       { "nvim-treesitter/nvim-treesitter" },
     },
-    enabled = false,
-    -- Plugin surpporting refactorings
-    -- Disable because it needs neovim nightly
   },
-  -- }}}
 
   -- Interface Extension {{{
-  {
-    "stevearc/stickybuf.nvim",
-    enabled = false,
-    -- Disable because it brings a more buggy behavior
-    -- https://github.com/neovim/neovim/issues/12517
-  },
-
   {
     "folke/noice.nvim",
     config = function()
       require "interface.noice"
     end,
     dependencies = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
       "MunifTanjim/nui.nvim",
-      -- OPTIONAL:
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
       "rcarriga/nvim-notify",
     },
   },
@@ -246,7 +204,9 @@ lazy.setup({
     config = function()
       require "interface.bufferline"
     end,
-    dependencies = { "kyazdani42/nvim-web-devicons" },
+    dependencies = { 
+     { "kyazdani42/nvim-web-devicons" },
+    },
   },
 
   {
@@ -266,9 +226,9 @@ lazy.setup({
       require "interface.barbecue"
     end,
     dependencies = {
-      "neovim/nvim-lspconfig",
-      "SmiteshP/nvim-navic",
-      "kyazdani42/nvim-web-devicons",
+      { "neovim/nvim-lspconfig" },
+      { "SmiteshP/nvim-navic" },
+      { "kyazdani42/nvim-web-devicons" },
     },
   },
 
@@ -292,7 +252,9 @@ lazy.setup({
     config = function()
       require "interface.ufo"
     end,
-    dependencies = "kevinhwang91/promise-async",
+    dependencies = {
+      { "kevinhwang91/promise-async" },
+    },
     event = "VeryLazy",
   },
 
@@ -302,15 +264,6 @@ lazy.setup({
       require "interface.lsp-inlayhints"
     end,
     event = "VeryLazy",
-  },
-
-  {
-    "VidocqH/lsp-lens.nvim",
-    config = function()
-      require "interface.lsp-lens"
-    end,
-    enabled = false,
-    -- Not stable
   },
 
   {
@@ -343,13 +296,6 @@ lazy.setup({
       require "interface.lspkind"
     end,
     event = "VeryLazy",
-  },
-
-  {
-    "weilbith/nvim-code-action-menu",
-    cmd = { "CodeActionMenu" },
-    enabled = false,
-    -- Disable because it not stable
   },
 
   {
@@ -390,11 +336,6 @@ lazy.setup({
     event = "VeryLazy",
   },
 
-  {
-    "dstein64/nvim-scrollview",
-    event = "VeryLazy",
-    enabled = false,
-  },
 
   {
     "lewis6991/satellite.nvim",
@@ -431,48 +372,11 @@ lazy.setup({
   },
 
   {
-    "folke/zen-mode.nvim",
-    config = function()
-      require "interface.zen-mode"
-    end,
-    keys = {
-      { "<leader>tz", "<Cmd>ZenMode<CR>", desc = "Zen Mode" },
-    },
-  },
-
-  {
-    "edluffy/specs.nvim",
-    config = function()
-      require "interface.specs"
-    end,
-    enabled = false,
-    -- Disable because it's conflicting with the chinese text
-  },
-
-  {
     "chentoast/marks.nvim",
     config = function()
       require "interface.marks"
     end,
     event = "VeryLazy",
-  },
-
-  {
-    "edluffy/hologram.nvim",
-    enabled = false,
-  },
-
-  {
-    "bennypowers/nvim-regexplainer",
-    config = function()
-      require "interface.regexplainer"
-    end,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-    },
-    enabled = false,
-    -- Not very useful now
   },
 
   {
@@ -483,14 +387,6 @@ lazy.setup({
     ft = { "tex", "markdown" },
   },
 
-  {
-    "sunjon/Shade.nvim",
-    config = function()
-      require "interface.shade"
-    end,
-    enabled = false,
-    -- Disable because conflict with other floating window plugins
-  },
   -- }}}
 
   -- Colorscheme {{{
@@ -561,21 +457,6 @@ lazy.setup({
   },
 
   {
-    "nvim-neo-tree/neo-tree.nvim",
-    config = function()
-      require "tool.neo-tree"
-    end,
-    branch = "v2.x",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
-      "s1n7ax/nvim-window-picker",
-    },
-    enabled = false,
-  },
-
-  {
     "simrat39/symbols-outline.nvim",
     config = function()
       require "tool.symbols-outline"
@@ -615,14 +496,6 @@ lazy.setup({
   },
 
   {
-    "gorbit99/codewindow.nvim",
-    config = function()
-      require "tool.codewindow"
-    end,
-    enabled = false,
-  },
-
-  {
     "s1n7ax/nvim-window-picker",
     version = "v1.*",
     config = function()
@@ -638,14 +511,6 @@ lazy.setup({
     end,
     dependencies = "nvim-lua/plenary.nvim",
     -- Lasy load cause error
-  },
-
-  {
-    "akinsho/git-conflict.nvim",
-    config = function()
-      require "tool.git-conflict"
-    end,
-    event = "VeryLazy",
   },
 
   {
@@ -671,50 +536,8 @@ lazy.setup({
   },
 
   {
-    "ruifm/gitlinker.nvim",
-    dependencies = "nvim-lua/plenary.nvim",
-    config = function()
-      require "tool.gitlinker"
-    end,
-    event = "VeryLazy",
-  },
-
-  {
-    "Rawnly/gist.nvim",
-    event = "VeryLazy",
-  },
-
-  {
     "tpope/vim-fugitive",
     event = "VeryLazy",
-  },
-
-  {
-    "rbong/vim-flog",
-    event = "VeryLazy",
-  },
-
-  {
-    "simnalamburt/vim-mundo",
-    config = function()
-      require "tool.mundo"
-    end,
-    keys = {
-      { "<leader>u", "<Cmd>MundoToggle<CR>", desc = "Undo Tree" },
-    },
-    event = "VeryLazy",
-  },
-
-  {
-    "kevinhwang91/nvim-fundo",
-    requires = "kevinhwang91/promise-async",
-    run = function()
-      require("fundo").install()
-    end,
-    config = function()
-      require "tool.fundo"
-    end,
-    enabled = false,
   },
 
   {
@@ -739,7 +562,9 @@ lazy.setup({
     config = function()
       require "tool.crates"
     end,
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = { 
+      { "nvim-lua/plenary.nvim" }
+    },
     event = { "BufRead Cargo.toml" },
   },
 
@@ -748,84 +573,14 @@ lazy.setup({
     config = function()
       require "tool.package-info"
     end,
-    dependencies = "MunifTanjim/nui.nvim",
+    dependencies = { 
+      { "MunifTanjim/nui.nvim" }
+    },
     event = {
       "BufRead package.json",
       "BufRead package-lock.json",
     },
   },
-
-  {
-    "pwntester/octo.nvim",
-    config = function()
-      require "tool.octo"
-    end,
-    cmd = { "Octo" },
-    enabled = false,
-    -- Subtitute for gh.nvim
-    -- Disable beca, better to , gh.nvim
-  },
-
-  {
-    "ldelossa/gh.nvim",
-    config = function()
-      require "tool.gh"
-    end,
-    dependencies = "ldelossa/litee.nvim",
-    enabled = false,
-    -- Disable since it could not work properly
-  },
-
-  {
-    "tpope/vim-dadbod",
-    enabled = false,
-  },
-
-  {
-    "kristijanhusak/vim-dadbod-ui",
-    cmd = { "DBUIToggle" },
-    enabled = false,
-  },
-
-  {
-    "nvim-orgmode/orgmode",
-    config = function()
-      require "tool.orgmode"
-    end,
-    event = "VeryLazy",
-  },
-
-  {
-    "akinsho/org-bullets.nvim",
-    config = function()
-      require "tool.org-bullets"
-    end,
-    ft = { "org" },
-  },
-
-  {
-    "lalitmee/browse.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim" },
-    enabled = false,
-  },
-
-  {
-    "rest-nvim/rest.nvim",
-    config = function()
-      require "tool.rest"
-    end,
-    ft = { "http" },
-  },
-
-  {
-    "martineausimon/nvim-lilypond-suite",
-    dependencies = { "MunifTanjim/nui.nvim" },
-    config = function()
-      require "tool.lilypond-suite"
-    end,
-    ft = { "lilypond" },
-  },
-  -- }}}
 
   -- Efficiency Improvement {{{
   {
@@ -875,15 +630,6 @@ lazy.setup({
     config = function()
       require "efficiency.auto-save"
     end,
-    enabled = false,
-    -- Disable because it could not be enabled manually
-  },
-
-  {
-    "ethanholz/nvim-lastplace",
-    config = function()
-      require "efficiency.lastplace"
-    end,
   },
 
   {
@@ -914,25 +660,10 @@ lazy.setup({
   },
 
   {
-    "dstein64/vim-startuptime",
-    cmd = { "StartupTime" },
-  },
-
-  {
-    "sindrets/winshift.nvim",
-    enabled = false,
-  },
-
-  {
     "willothy/flatten.nvim",
     config = function()
       require "efficiency.flatten"
     end,
-  },
-
-  {
-    "jcdickinson/wpm.nvim",
-    enabled = false,
   },
   -- }}}
 
@@ -947,20 +678,7 @@ lazy.setup({
   },
 
   {
-    "rcarriga/neotest",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "antoinemadec/FixCursorHold.nvim",
-    },
-    enabled = false,
-  },
-
-  {
-    "rafcamlet/nvim-luapad",
-    enabled = false,
-  },
-
+ ~
   {
     "mfussenegger/nvim-dap",
     config = function()
@@ -986,7 +704,7 @@ lazy.setup({
       require "debug.dap-ui"
     end,
     requires = {
-      "mfussenegger/nvim-dap",
+      { "mfussenegger/nvim-dap" },
     },
     event = "VeryLazy",
   },
@@ -998,32 +716,9 @@ lazy.setup({
     end,
     ft = { "python" },
   },
-
-  {
-    "Civitasv/cmake-tools.nvim",
-    enabled = false,
-  },
   -- }}}
 
-  -- Language Specific {{{
-  {
-    "lervag/vimtex",
-    config = function()
-      require "language.tex"
-    end,
-    ft = { "tex" },
-  },
-
-  {
-    "plasticboy/vim-markdown",
-    ft = { "markdown" },
-  },
-
-  {
-    "jakewvincent/mkdnflow.nvim",
-    enabled = false,
-  },
-
+  -- Lang
   {
     "p00f/clangd_extensions.nvim",
     config = function()
@@ -1047,36 +742,6 @@ lazy.setup({
     ft = {
       "rust",
     },
-  },
-
-  {
-    "mfussenegger/nvim-jdtls",
-    config = function()
-      require "language.jdtls"
-    end,
-    ft = { "java" },
-  },
-
-  {
-    "ray-x/go.nvim",
-    config = function()
-      require "language.go"
-    end,
-    dependencies = {
-      "ray-x/guihua.lua",
-    },
-    ft = { "go", "gomod" },
-  },
-
-  {
-    "akinsho/flutter-tools.nvim",
-    config = function()
-      require "language.flutter-tools"
-    end,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    ft = { "dart" },
   },
 
   {
@@ -1217,13 +882,13 @@ lazy.setup({
     -- automatically check for plugin updates
     enabled = false,
     concurrency = nil, ---@type number? set to 1 to check for updates very slowly
-    notify = true, -- get a notification when new updates are found
+    notify = false, -- get a notification when new updates are found
     frequency = 3600, -- check for updates every hour
   },
   change_detection = {
     -- automatically check for config file changes and reload the ui
     enabled = true,
-    notify = true, -- get a notification when changes are found
+    notify = false, -- get a notification when changes are found
   },
   performance = {
     cache = {
@@ -1237,7 +902,6 @@ lazy.setup({
       disable_events = { "UIEnter", "BufReadPre" },
       ttl = 3600 * 24 * 5, -- keep unused modules for up to 5 days
     },
-    reset_packpath = true, -- reset the package path to improve startup time
     rtp = {
       reset = true, -- reset the runtime path to $VIMRUNTIME and your config directory
       ---@type string[]
@@ -1251,7 +915,7 @@ lazy.setup({
         -- "tarPlugin",
         -- "tohtml",
         -- "tutor",
-        -- "zipPlugin",
+a        -- "zipPlugin",
       },
     },
   },
