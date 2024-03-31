@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+
+cd ~/.local/share && git clone https://github.com/DreamMaoMao/hych.git && cd hych
+bash install.sh;   
+  
