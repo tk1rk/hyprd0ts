@@ -1,4 +1,4 @@
-{
+return {
     "jinzhongjia/LspUI.nvim",
     branch = "main",
     config = function()
