@@ -1,7 +1,7 @@
-#!/usr/bin/env sh
+#!/bin/bash
 
 CONFIG="$HOME/.config/dunst/dunstrc"
 
-if [[ ! `pidof dunst` ]]; then
+if [[ ! $(pidof dunst) ]]; then
 	dunst --config ${CONFIG}
 fi
