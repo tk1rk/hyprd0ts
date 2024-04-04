@@ -38,8 +38,9 @@ nm-applet --indicator &
 # polkit
 /usr/lib/polkit-kde-authentication-agent-1 &
 
-# Lauch statusbar (waybar)
-waybar --bar 'top' --config '~/.config/waybar/config.jsonc' --style '~/.config/waybar/style.css' &
+# app launcher
+nwggrid-server &
 
-
+# foot
+foot -s &
 
