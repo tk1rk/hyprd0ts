@@ -1,4 +1,4 @@
-# hyprd0ts/.config/nvim
+# hyprd0ts
 
 <a href="https://dotfyle.com/tk1rk/hyprdts-config-nvim"><img src="https://dotfyle.com/tk1rk/hyprdts-config-nvim/badges/plugins?style=flat" /></a>
 <a href="https://dotfyle.com/tk1rk/hyprdts-config-nvim"><img src="https://dotfyle.com/tk1rk/hyprdts-config-nvim/badges/leaderkey?style=flat" /></a>
