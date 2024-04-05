@@ -11,11 +11,8 @@ alias ls='eza -lA --header --icons=always --color=always --color-scale --color-s
 command -v bat > /dev/null && \
         alias bat='bat --theme=Dracula' && \
         alias cat='bat --pager=never --theme=Dracula' && \
-        alias less='bat --theme=Dracula'
-
-# bathelp
-alias bathelp='bat --plain --language=help'
-function help() {
-    "$@" --help 2>&1 | bathelp
-}
+        alias less='bat --theme=Dracula' && \
+        # using bat to colorize help pages && \
+        alias bathelp='bat --theme=Dracula --language=help' && \
+        alias help='"$@" --help 2>&1 | bathelp'
 
