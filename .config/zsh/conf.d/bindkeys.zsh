@@ -57,3 +57,14 @@ if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
 	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
 fi
 
+# makes Tab and ShiftTab, when pressed on the command line, cycle through listed completions, without changing what's listed in the menu:
+bindkey              '^I'         menu-complete
+bindkey "$terminfo[kcbt]" reverse-menu-complete
+
+# makes ← and → always move the cursor on the command line, even when you are in the menu
+bindkey -M menuselect  '^[[D' .backward-char  '^[OD' .backward-char
+bindkey -M menuselect  '^[[C'  .forward-char  '^[OC'  .forward-char
+
+# makes Enter always submit the command line, even when you are in the menu:
+bindkey -M menuselect '^M' .accept-line
+
