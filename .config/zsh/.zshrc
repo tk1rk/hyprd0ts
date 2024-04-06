@@ -5,32 +5,31 @@ source ${ZDOTDIR}/conf.d/aliases.zsh
 source ${ZDOTDIR}/conf.d/functions.zsh
 source ${ZDOTDIR}/conf.d/predict.zsh
 
-# theme
-plug "romkatv/powerlevel10k"
+# zimfw
+if [[ ! $ZDOTDIR/zimrc ]]; then
+        command curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
+fi
+#-------------------------------------------------------
+# degit
+zstyle ':zim:zmodule' use 'degit'
+#-------------------------------------------------------
+# zim home
+ZIM_HOME=~/.zim
+#-------------------------------------------------------
+# Download zimfw plugin manager if missing.
+if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
+  curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
+      https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+fi
+#-------------------------------------------------------
+# Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
+  source ${ZIM_HOME}/zimfw.zsh init -q
+fi
+#------------------------------------------------------
+# Initialize modules.
+source ${ZIM_HOME}/init.zsh
 
-# zap plugins
-plug "zap-zsh/supercharge"
-plug "zap-zsh/completions"
-plug "zap-zsh/sudo"
-plug "zap-zsh/nvm"
-
-# zsh-users plugins
-plug "zsh-users/zsh-autosuggestions"
-plug "zsh-users/zsh-completions"
-plug "zsh-users/zsh-history-substring-search"
-
-# z-shell plugins
-plug "z-shell/F-Sy-H"
-plug "z-shell/zsh-eza"
-plug "z-shell/zsh-fancy-completions"
-plug "z-shell/H-S-MW"
-
-# local sources
-plug "$ZDOTDIR/config/aliases.zsh"
-plug "$ZDOTDIR/config/autosuggestions.zsh"
-plug "$ZDOTDIR/config/bindkeys.zsh"
-plug "$ZDOTDIR/config/functions.zsh"
-plug "$ZDOTDIR/config/history.zsh"
 
 # zd (zi docker)
 #docker run --rm -it ghcr.io/z-shell/zd:latest
