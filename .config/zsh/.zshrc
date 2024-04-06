@@ -3,10 +3,10 @@
 # sources
 source ${ZDOTDIR}/conf.d/aliases.zsh
 source ${ZDOTDIR}/conf.d/functions.zsh
-source ${ZDOTDIR}/conf.d/predict.zsh
+source ${ZDOTDIR}/conf.d/completion.zsh
 
 # zimfw
-if [[ ! $ZDOTDIR/zimrc ]]; then
+if [[ ! $ZDOTDIR/.zimrc ]]; then
         command curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
 fi
 #-------------------------------------------------------
@@ -14,7 +14,8 @@ fi
 zstyle ':zim:zmodule' use 'degit'
 #-------------------------------------------------------
 # zim home
-ZIM_HOME=~/.zim
+ZIM_HOME=$ZDOTDIR/.zim
+ZIM_CONFIG_FILE=$_ZDOTDIR/.zimrc
 #-------------------------------------------------------
 # Download zimfw plugin manager if missing.
 if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
