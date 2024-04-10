@@ -39,8 +39,8 @@
 	"panels": [
 		{
 			"id": "panel0",
-			"edge": "EDGE_RIGHT",
-			"size": 64,
+			"edge": "EDGE_TOP",
+			"size": 30,
 			"monitor": "",
 			"modules": [
 				{
