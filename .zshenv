@@ -1,5 +1,4 @@
-#
-
-ZDOTDIR=${HOME}/.config/zsh
-[[ -f ${ZDOTDIR}/.zshrc ]] && source ${ZDOTDIR}/.zshrc
+# $ZDOTDIR
+export ZDOTDIR=$HOME/.config/zsh
+[[ -f $ZDOTDIR/.zshrc ]] && source $ZDOTDIR/.zshrc
 
