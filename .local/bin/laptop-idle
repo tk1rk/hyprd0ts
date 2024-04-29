@@ -1,0 +1,4 @@
+#!/bin/sh
+
+wayland-pipewire-idle-inhibit &
+hypridle
