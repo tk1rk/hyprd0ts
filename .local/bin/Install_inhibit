@@ -1,7 +1,0 @@
-#!/bin/bash
-
-cargo install wayland-pipewire-idle-inhibit;
-
-systemctl --user daemon-reload
-
-systemctl --user enable wayland-pipewire-idle-inhibit.service --now;
