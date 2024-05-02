@@ -4,7 +4,8 @@ export DISPLAY=:0
 export XAUTHORITY=/home/tk/.Xauthority
 export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"
 
-source $HOME/.local/bin/environment.sh
+icon_mtp_desktop="$HOME/.config/mako/icons/mtp-desktop.png"
+icon_mtp_laptop="$HOME/.config/mako/icons/mtp-laptop.png"
 
 if [ "$ACTION" = "add" ]; then
     if [ -d /sys/class/power_supply ]; then
