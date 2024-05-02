@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-CONFIG="$HOME/.config/dunst/dunstrc"
+CONFIG="$HOME/.config/mako/config"
 
 if [[ ! $(pidof dunst) ]]; then
 	dunst --config ${CONFIG}
