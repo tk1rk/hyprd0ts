@@ -1,31 +1,19 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # usage: import gtk-3.0 setting
 CONFIG="$XDG_CONFIG_HOME/gtk-3.0/settings.ini"
-
+# -----------------------------
 if [ ! -f "$CONFIG" ]; then 
     exit 1; 
 fi
 
-SCHEMA="gsettings set org.gnome.desktop.interface"
-SCHEMAWM="gsettings set org.gnome.desktop.wm.preferences theme"
-
 # Set GTK Themes, Icons, Cursor and Fonts
-THEME=Dracula"
-ICONS="Papirus-Dark"
-FONT="MesloLGS Nerd Font 12"
-DOC_FONT="MesloLGS Nerd Font 12"
-MONO_FONT="MesloLGS Nerd Font 12"
-
+gsettings set org.gnome.desktop.wm.preferences theme Dracula
+gsettings set org.gnome.desktop.interface gtk-theme Dracula
+gsettings set org.gnome.desktop.interface icon-theme Papirus-Dark
+gsettings set org.gnome.desktop.interface font-name "MesloLGS Nerd Font 12"
+gsettings set org.gnome.desktop.interface document-font-name "MesloLGS Nerd Font 12"
+gsettings set org.gnome.desktop.interface monospace-font-name "MesloLGS Nerd Font 12"
+gsettings set org.gnome.desktop.interface menus-have-icons true
+gsettings set org.gnome.desktop.interface enable-animations true
  
-apply_themes() {
-    ${SCHEMAWM} theme ${THEME} 
-    ${SCHEMA} gtk-theme ${THEME}
-    ${SCHEMA} icon-theme ${ICONS}
-    ${SCHEMA} font-name ${FONT}
-    ${SCHEMA} document-font-name ${DOC_FONT}
-    ${SCHEMA} monospace-font-name ${MONO_FONT}
-    ${SCHEMA} menus-have-icons true
-    ${SCHEMA} enable-animations true
-}
-apply_themes
