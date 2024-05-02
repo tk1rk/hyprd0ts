@@ -1,0 +1,8 @@
+#!/usr/bin/env sh 
+
+CONTENT=$(curl -s https://freegeoip.app/json/) 
+
+lon=-122.244 
+lat=47.884 
+
+wlsunset -l $lat -L $lon
