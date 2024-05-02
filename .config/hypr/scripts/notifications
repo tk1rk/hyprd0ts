@@ -2,6 +2,6 @@
 
 CONFIG="$HOME/.config/mako/config"
 
-if [[ ! $(pidof dunst) ]]; then
-	dunst --config ${CONFIG}
+if [[ ! $(pidof mako) ]]; then
+	mako --config ${CONFIG}
 fi
