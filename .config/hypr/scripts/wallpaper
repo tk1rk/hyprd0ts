@@ -1,7 +1,4 @@
 #!/usr/bin/bash
 
-# start wallpaper daemon & app
-swww init;
-
-# select wallpaper
-swww img ~/.config/hypr/wallpapers/pacman.png
+# start wallpaper daemon & select wallpaper
+swww-daemon && swww img ~/.config/hypr/wallpapers/pacman.png
