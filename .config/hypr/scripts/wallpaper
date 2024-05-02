@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 # start wallpaper daemon & select wallpaper
 swww-daemon && swww img ~/.config/hypr/wallpapers/pacman.png
