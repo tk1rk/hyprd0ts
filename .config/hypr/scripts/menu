@@ -1,13 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-nwggrid \
-	-o 0.5 \
-	-b 282A36 \
-	-n 7 \
-	-s 84 \
-	-c drawer.css \
-	-g Dracula \
-	-wm Hyprland \
-	-no-categories
+nwg-drawer -c 6 -fm Thunar -ft Dracula -i Papirus-Dark -is 72 -nocats -nofs -ovl -pbexit "hyprctl dispatch exit" -pblock hyprlock -pbpoweroff "systemctl poweroff -i" -pbreboot "systemctl reboot -i" -pbsize 48 -pbsleep "systemctl suspend -i" -s style.css
+
 
 	
