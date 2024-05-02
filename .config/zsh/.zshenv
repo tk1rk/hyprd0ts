@@ -1,13 +1,9 @@
-#!/usr/bin/env zsh
-
-#### xdg
+# xdg
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_DOWNLOADS_HOME="$HOME/Downloads"
-export XDG_DOCUMENTS_HOME="$HOME/Documents"
-export XDG_MUSIC_HOME="$HOME/Music"
 export XDG_PICTURES_HOME="$HOME/Pictures"
 
 # locale
@@ -18,10 +14,16 @@ export LC_TIME="en_US.UTF-8"
 
 #### ZSH
 export ZDOTDIR="$HOME/.config/zsh"
-export ZSH_CACHE="$HOME/.cache/zsh"
+export ZCACHE="$HOME/.cache/zsh"
 
-### Create cache and completions dir and add to $fpath ###
-fpath+=('$HOME/.cache/zsh/completions')
+### Create cache and completions dir and add to $fpath & path
+if [[ ! $ZCACHE/completions ]]; then
+        command mkdir -p $ZCACHE/completions
+fi
+if [[ ! $ZDOTDIR/autoload ]]; then
+        command mkdir -p $ZDOTDIR/autoload
+export FPATH="$ZDOTDIR/autoload:$ZCACHE/completions:$FPATH"
+export PATH="$HOME.local/bin:$HOME/.config/hypr/scripts:$HOME/.config/waybar/scripts:$HOME/.local/share/cargo/bin:$HOME:$PATH"
 _comp_options+=(globdots)
 
 # Editor + Others
@@ -54,13 +56,6 @@ if [ -n "${NVIM_LISTEN_ADDRESS+x}" ] || [ -n "${NVIM+x}" ]; then
   else
     export MANPAGER="nvim -c 'Man!'"
 fi
-
-### Path ###
-path+=("$HOME/.local/bin")
-path+=("$HOME/.cargo/bin")
-path+=("$HOME/Applications")
-path+=("$HOME/.config")
-export PATH
 
 ### TERMINAL ###
 export TERMINAL="alacritty"
