@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source ${HOME}/.local/bin/environment.sh
+icon_package="$HOME/.local/bin/notifications/icons/package-update.png"
 
 num_updates=$(checkupdates | wc -l)
 if [[ $num_updates -gt 0 ]]; then
