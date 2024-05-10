@@ -60,7 +60,7 @@
         "format-ethernet": "",
         "format-disconnected": "睊",
         "tooltip-format": "{essid}",
-        "on-click": "~/.config/waybar/scripts/network/rofi-network-manager.sh",
+        "on-click": "nm-applet",
         "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
     },
     "pulseaudio": {
