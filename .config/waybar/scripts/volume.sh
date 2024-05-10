@@ -1,77 +1,60 @@
 #!/usr/bin/env bash
 
+# Needed packages: pactl
+# Usage: 
+# Write path to this script in your WM config.
+# 
+# Example for i3wm / sway: 
+# XF86AudioRaiseVolume  exec ~/.local/bin/notifications/volume.sh up
+# XF86AudioLowerVolume  exec ~/.local/bin/notifications/volume.sh down
+# XF86AudioMute         exec ~/.local/bin/notifications/volume.sh mute
 
-iDIR="$HOME/.config/mako/icons"
+source $HOME/.local/bin/environment.sh
 
-# Get Volume
-get_volume() {
-	volume=`amixer get Master | tail -n1 | awk -F ' ' '{print $5}' | tr -d '[]'`
-	echo "$volume"
-}
+# Get current volume and mute status
+currentVol="$(pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+%' | head -n1 | tr -d '%')"
+isMute="$(pactl get-sink-mute @DEFAULT_SINK@ | sed 's/Mute: //')"
 
-# Get icons
-get_icon() {
-	vol="$(get_volume)"
-	current="${vol%%%}"
-	if [[ "$current" -eq "0" ]]; then
-		icon="$iDIR/volume-mute.png"
-	elif [[ ("$current" -ge "25") && ("$current" -le "25") ]]; then
-		icon="$iDIR/volume-low.png"
-	elif [[ ("$current" -ge "50") && ("$current" -le "50") ]]; then
-		icon="$iDIR/volume-mid.png"
-	elif [[ ("$current" -ge "75") && ("$current" -le "75") ]]; then
-		icon="$iDIR/volume-high.png"
-        elif [[ ("$current" -ge "100") && ("$current" -le "100") ]]; then
-		icon="$iDIR/volume-full.png"
-	fi
-}
-
-# Notify
-notify_user() {
-	notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$icon" "Volume : $(get_volume)"
-}
-
-# Increase Volume
-inc_volume() {
-	amixer -Mq set Master,0 5%+ unmute && get_icon && notify_user
-}
-
-# Decrease Volume
-dec_volume() {
-	amixer -Mq set Master,0 5%- unmute && get_icon && notify_user
-}
-
-# Toggle Mute
-toggle_mute() {
-	amixer get Master | grep '\[on\]' &>/dev/null
-	if [[ "$?" == 0 ]]; then
-		amixer set Master toggle && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$iDIR/volume-mute.png" "Mute"
-	else
-		amixer set Master toggle && get_icon && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$icon" "Unmute"
-	fi
-}
-
-# Toggle Mic
-toggle_mic() {
-	amixer get Capture | grep '\[on\]' &>/dev/null
-	if [[ "$?" == 0 ]]; then
-		amixer -D pulse sset Capture toggle && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$iDIR/microphone-mute.png" "Microphone Switched OFF"
-	else
-		amixer -D pulse sset Capture toggle && get_icon && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$iDIR/microphone.png" "Microphone Switched ON"
-	fi
-}
-
-# Execute accordingly
-if [[ "$1" == "--get" ]]; then
-	get_volume
-elif [[ "$1" == "--inc" ]]; then
-	inc_volume
-elif [[ "$1" == "--dec" ]]; then
-	dec_volume
-elif [[ "$1" == "--toggle" ]]; then
-	toggle_mute
-elif [[ "$1" == "--toggle-mic" ]]; then
-	toggle_mic
+# Send notification based on current volume and mute status
+if [[ "$isMute" == "yes" ]]; then
+    notify-send -i "$icon_volume_mute" -u low -r 20 "Volume: ${currentVol}%"
+elif [[ "$currentVol" -ge 80 ]]; then
+    notify-send -i "$icon_volume_high" -u low -r 20 "Volume: ${currentVol}%"
+elif [[ "$currentVol" -ge 1 ]]; then 
+    notify-send -i "$icon_volume_half" -u low -r 20 "Volume: ${currentVol}%"
 else
-	get_volume
+    notify-send -i "$icon_volume_mute" -u low -r 20 "Volume: ${currentVol}%"
 fi
+
+# Adjust volume based on user input
+case "$1" in 
+    up)
+        if [[ "$currentVol" -lt 100 ]]; then
+            pactl set-sink-volume @DEFAULT_SINK@ +5%
+        fi
+        ;;
+    down)
+        pactl set-sink-volume @DEFAULT_SINK@ -5% 
+        ;;
+    mute)
+        pactl set-sink-mute @DEFAULT_SINK@ toggle
+        ;;
+esac
+
+# Send notification again to update volume display
+send_notify() {
+    current_vol="$(pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+%' | head -n1 | tr -d '%')"
+    isMute="$(pactl get-sink-mute @DEFAULT_SINK@ | sed 's/Mute: //')"
+
+    if [[ "$isMute" == "yes" ]]; then
+        notify-send -i "$icon_volume_mute" -u low -r 20 "Volume: ${current_vol}%"
+    elif [[ "$currentVol" -ge 80 ]]; then
+        notify-send -i "$icon_volume_high" -u low -r 20 "Volume: ${current_vol}%"
+    elif [[ "$currentVol" -ge 1 ]]; then 
+        notify-send -i "$icon_volume_half" -u low -r 20 "Volume: ${current_vol}%"
+    else
+        notify-send -i "$icon_volume_mute" -u low -r 20 "Volume: ${current_vol}%"
+    fi
+}
+
+send_notify
