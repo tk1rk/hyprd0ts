@@ -1,13 +1,9 @@
 #!/usr/bin/env bash
 
-# Needed packages: pactl
-# Usage: 
-# Write path to this script in your WM config.
-# 
-# Example for i3wm / sway: 
-# XF86AudioRaiseVolume  exec ~/.local/bin/notifications/volume.sh up
-# XF86AudioLowerVolume  exec ~/.local/bin/notifications/volume.sh down
-# XF86AudioMute         exec ~/.local/bin/notifications/volume.sh mute
+# Example for Hyprland: 
+# bind = , XF86AudioRaiseVolume, exec, ~/.local/bin/notifications/volume.sh up
+# bind = , XF86AudioLowerVolume, exec, ~/.local/bin/notifications/volume.sh down
+
 
 source $HOME/.local/bin/environment.sh
 
