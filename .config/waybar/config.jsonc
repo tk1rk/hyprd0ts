@@ -1,6 +1,6 @@
 {
-    "height": 35,
-    "width": 2057,
+    "height": 30,
+    "width": 1648,
     "name": "main-bar",
     "id": "main-bar",
     "position": "top",
@@ -11,7 +11,8 @@
     "gtk-layer-shell": true,
     "ipc": true,
     "modules-left": ["custom/launcher", "hyprland/workspaces"],
-    "modules-right": ["tray", "network", "pulseaudio", "bluetooth", "backlight", "battery", "custom/lock", "clock", "custom/power-menu"],
+    "modules-right": ["tray", "network", "pulseaudio", "bluetooth", "backlight", "battery", "clock", "custom/powermenu"],
+    
     "hyprland/workspaces": {
       "active-only":  false,
       "all-outputs": true,
@@ -20,27 +21,30 @@
       "format-window-separator": "\n",
       "window-rewrite-default": "",
       "window-rewrite": {
-        "title<.*youtube.*>": "", // Windows whose titles contain "youtube"
-        "class<firefox>": "", // Windows whose classes are "firefox"
-        "class<firefox> title<.*github.*>": "", // Windows whose class is "firefox" and title contains "github". Note that "class" always comes first.
-        "foot": "", // Windows that contain "foot" in either class or title. For optimization reasons, it will only match against a title if at least one other window explicitly matches against a title.
+        "title<.*youtube.*>": "", 
+        "title<.*vivaldi.*>": "", 
+        "title<.*github-desktop.*>": "", 
+        "class<vivaldi> title<.*free-code-camp.*>": "",
+        "foot": "",
+        "kitty": "",
+        "alacritty": "",
         "code": "󰨞",
-	    },
+      },
       "format-icons": {
-        "active": " 󰮯",
+        "active": "󰮯",
         "default": "",
         "persistent": "",
-        "empty": ""
-      }
+        "empty": "",
+      },
       "persistent-workspaces": {
-        "*": 5
-      }
+        "*": 5,
+      },
     },
     "hyprland/window": {
-        "format": "{}"
+        "format": "{}",
     },
     "tray": {
-        "spacing": 10
+        "spacing": 6,
     },
     "clock": {
         "format": "{:%H:%M}",
@@ -52,15 +56,24 @@
         "format": "{percent}% {icon}",
         "tooltip-format": "{percent}%",
         "format-icons": ["󱩎 ", "󱩏 ", "󱩐 ", "󱩑 ", "󱩒 ", "󱩓 ", "󱩔 ", "󱩕 ", "󱩖 ", "󰛨 "],
-
     },
+    "bluetooth": {
+	"format": " {status}",
+        "on-click": "blueman-applet",
+	"format-connected": " {device_alias}",
+	"format-connected-battery": " {device_alias} {device_battery_percentage}%",
+	"tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+	"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+	"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+	"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
+    }"
     "network": {
         "format": "{icon}",
         "format-wifi": "直",
         "format-ethernet": "",
         "format-disconnected": "睊",
         "tooltip-format": "{essid}",
-        "on-click": "nm-applet",
+        "on-click": "nm-applet --indicator &",
         "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
     },
     "pulseaudio": {
@@ -69,7 +82,7 @@
         "format-icons": {
             "default": ["", "", "墳"]
         },
-        "on-click": "pavucontrol &"
+        "on-click": "mixxc &"
     },
     "battery": {
       "bat": "BAT0",
@@ -78,39 +91,31 @@
       "states": {
           "good": 95
           "warning": 30,
-          "critical": 15
+          "critical": 15,
       },
       "max-length": 20,
       "format": "{capacity}% {icon}",
-      "format-alt": "{time} {icon}",
       "format-warning": "{capacity}% 󱃌",
       "format-critical": "{capacity}% 󱟩",
       "format-charging": "{capacity}% 󰢞",
       "format-plugged": "󰚥", 
-
-      "format-alt": "{icon} {time}",
       "format-full": "ﮣ", 
       "format-icons": ["󱊡", "󱊢", "󱊣"]
     },
-   "custom/lock": {
-       "tooltip" : false,
-       "on-click": "hyprlock",
-       "format" : "",
-    },
    "custom/spotify": {
-        "exec": "python3 ~/.config/waybar/scripts/mediaplayer.py --player spotify",
+        "exec": "python ~/.config/waybar/scripts/mediaplayer.py --player spotify",
         "format": " {}",
         "return-type": "json",
-        "on-click": "playerctl play-pause",
-        "on-double-click-right": "playerctl next",
-        "on-scroll-down": "playerctl previous",
+        "on-click": "playerctl play-pause --player spotify",
+        "on-double-click-right": "playerctl next --player spotify",
+        "on-scroll-down": "playerctl previous --player spotify",
     },
     "custom/powermenu": {
-        "format": "<span class=\"material-symbols-outlined\">skull</span>",
-        "on-click": "bash ~/.config/waybar/scripts/power-menu/powermenu.sh &",
+        "format": "󱄲",
+        "on-click": "nwg-bar &",
     }, 
     "custom/launcher": {
         "format": "",
-        "on-click": "rofi -show drun &",
+        "on-click": "nwg-drawer &",
     },
 }
