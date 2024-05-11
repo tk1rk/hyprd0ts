@@ -1,0 +1,97 @@
+{
+    "height": 38,
+    "name": "main-bar",
+    "id": "main-bar",
+    "position": "top",
+    "layer": "top",
+    "mod": "dock",
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "fixed-center": true,
+    "reload_style_on_change": true,
+    "ipc": true,
+    "spacing": 6,
+    "margin": 6,
+    "modules-left": ["custom/launcher", "hyprland/workspaces"],
+    "modules-right": ["tray", "network", "pulseaudio", "bluetooth", "backlight", "battery", "clock", "custom/powermenu"],
+    
+    "hyprland/workspaces": {
+      "active-only":  false,
+      "all-outputs": true,
+      "on-click": "activate",
+      "format": "{icon}",
+      "format-icons": {
+	"1": "",
+	"2": "",
+ 	"3": "",
+	"4": "",
+	"5": "",
+        "active": "󰮯",
+        "default": "",
+        "persistent": "",
+      },
+      "persistent-workspaces": {
+        "*": 5
+      },
+    },
+    "tray": {
+        "spacing": 6
+    },
+    "clock": {
+        "format": "{:%H:%M}"
+    },
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon}%",
+        "format-icons": ["󱩎", "󱩏", "󱩐", "󱩑", "󱩒", "󱩓", "󱩔", "󱩕", "󱩖", "󰛨"]
+    },
+    "bluetooth": {
+        "on-click": "blueman-applet",
+	"format": "",
+	"format-connected": "",
+	"format-connected-battery": "",
+    },
+    "network": {
+        "format": "{icon}",
+        "format-wifi": "直",
+        "format-ethernet": "",
+        "format-disconnected": "睊",
+        "on-click": "nm-applet --indicator &",
+        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"]
+    },
+    "pulseaudio": {
+      	"on-click": "mixxc &",
+        "format": "{icon}",
+        "format-muted": "婢",
+        "format-icons": {
+            "default": ["", "", "墳"],
+        }
+    },
+    "battery": {
+      "bat": "BAT0",
+      "adapter": "ADP0",
+      "interval": 60,
+      "states": {
+          "good": 95,
+          "warning": 30,
+          "critical": 15,
+      },
+      "max-length": 20,
+      "format": "{icon}%",
+      "format-warning": "󱃌",
+      "format-critical": "󱟩",
+      "format-charging": "󰢞",
+      "format-plugged": "󰚥", 
+      "format-full": "󱊣", 
+      "format-icons": ["󱊡", "󱊢", "󱊣"]
+    },
+    "custom/powermenu": {
+        "format": "󱄲",
+        "on-click": "nwg-bar &"
+    }, 
+    "custom/launcher": {
+        "format": "",
+        "on-click": "nwg-drawer &"
+    },
+}
