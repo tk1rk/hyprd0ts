@@ -89,9 +89,9 @@
     "custom/powermenu": {
         "format": "󱄲",
         "on-click": "nwg-bar &"
-    }
+    },
     "custom/launcher": {
         "format": "",
         "on-click": "nwg-drawer &"
-    },
+    }
 }
