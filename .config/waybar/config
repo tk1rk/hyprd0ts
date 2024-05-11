@@ -22,17 +22,17 @@
       "on-click": "activate",
       "format": "{icon}",
       "format-icons": {
-	"1": "",
-	"2": "",
- 	"3": "",
-	"4": "",
-	"5": "",
-        "active": "󰮯",
-        "default": "",
-        "persistent": "",
+	  	  "1": "",
+	      "2": "",
+	  	  "3": "",
+		  "4": "",
+		  "5": "",
+          "active": "󰮯",
+          "default": "",
+          "persistent": "",
       },
       "persistent-workspaces": {
-        "*": 5
+          "*": 5
       },
     },
     "tray": {
@@ -48,9 +48,9 @@
     },
     "bluetooth": {
         "on-click": "blueman-applet",
-	"format": "",
-	"format-connected": "",
-	"format-connected-battery": "",
+		"format": "",
+		"format-connected": "",
+		"format-connected-battery": "",
     },
     "network": {
         "format": "{icon}",
@@ -69,27 +69,27 @@
         }
     },
     "battery": {
-      "bat": "BAT0",
-      "adapter": "ADP0",
-      "interval": 60,
-      "states": {
-          "good": 95,
-          "warning": 30,
-          "critical": 15,
-      },
-      "max-length": 20,
-      "format": "{icon}%",
-      "format-warning": "󱃌",
-      "format-critical": "󱟩",
-      "format-charging": "󰢞",
-      "format-plugged": "󰚥", 
-      "format-full": "󱊣", 
-      "format-icons": ["󱊡", "󱊢", "󱊣"]
+      	"bat": "BAT0",
+      	"adapter": "ADP0",
+      	"interval": 60,
+      	"states": {
+          	"good": 95,
+          	"warning": 30,
+          	"critical": 15,
+      	},
+      	"max-length": 20,
+      	"format": "{icon}%",
+      	"format-warning": "󱃌",
+     	"format-critical": "󱟩",
+      	"format-charging": "󰢞",
+      	"format-plugged": "󰚥", 
+      	"format-full": "󱊣", 
+      	"format-icons": ["󱊡", "󱊢", "󱊣"]
     },
     "custom/powermenu": {
         "format": "󱄲",
         "on-click": "nwg-bar &"
-    }, 
+    }
     "custom/launcher": {
         "format": "",
         "on-click": "nwg-drawer &"
