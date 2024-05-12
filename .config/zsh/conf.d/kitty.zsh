@@ -1,3 +1,13 @@
+#!/bin/zsh
+
+'builtin' 'typeset' _ksi_file="${${(%):-%x}:A:h}"/kitty-integration
+if [[ -r "$_ksi_file" ]]; then
+    'builtin' 'autoload' '-Uz' '--' "$_ksi_file"
+    "${_ksi_file:t}"
+    'builtin' 'unfunction' '--' "${_ksi_file:t}"
+fi
+'builtin' 'unset' '_ksi_file'
+
 # This file can get sourced with aliases enabled. To avoid alias expansion
 # we quote everything that can be quoted. Some aliases will still break us
 # though.
