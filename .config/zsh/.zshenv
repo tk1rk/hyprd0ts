@@ -22,6 +22,8 @@ if [[ ! $ZCACHE/completions ]]; then
 fi
 if [[ ! $ZDOTDIR/autoload ]]; then
         command mkdir -p $ZDOTDIR/autoload
+fi
+
 export FPATH="$ZDOTDIR/autoload:$ZCACHE/completions:$FPATH"
 export PATH="$HOME.local/bin:$HOME/.config/hypr/scripts:$HOME/.config/waybar/scripts:$HOME/.local/share/cargo/bin:$HOME:$PATH"
 _comp_options+=(globdots)
@@ -31,7 +33,7 @@ export EDITOR="nvim"
 export SUDO_EDITOR="nvim"
 export VISUAL="nvim"
 export PAGER="nvim +Man!"
-export BROWSER="vivaldi-stable"
+export BROWSER="vivaldi"
 
 export EXA_COLORS="\
 uu=36:\
