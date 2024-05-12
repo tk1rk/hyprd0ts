@@ -1,6 +1,5 @@
-# Functions!
-# In case a command is not found, try to find the package that has it
-function command_not_found_handler {
+# when command is not found, try to find the package that has it
+function command_not_found_handler() {
     local purple='\e[1;35m' bright='\e[0;1m' green='\e[1;32m' reset='\e[0m'
     printf 'zsh: command not found: %s\n' "$1"
     local entries=( ${(f)"$(/usr/bin/pacman -F --machinereadable -- "/usr/bin/$1")"} )
@@ -19,7 +18,7 @@ function command_not_found_handler {
     return 127
 }
 
-extract () {
+function extract() {
 	for archive in "$@"; do
 		if [ -f "$archive" ] ; then
 			case $archive in
@@ -61,4 +60,19 @@ cpp()
 		}
 	END { print "" }' total_size="$(stat -c '%s' "${1}")" count=0
 }
-
+# colored output
+zmodload zsh/zpty
+# colored output for apps
+pty() {
+	zpty pty-${UID} ${1+$@}
+	if [[ ! -t 1 ]];then
+		setopt local_traps
+		trap '' INT
+	fi
+	zpty -r pty-${UID}
+	zpty -d pty-${UID}
+}
+# colored output for less
+ptyless() {
+	pty $@ | less
+}
