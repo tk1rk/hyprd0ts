@@ -1,18 +1,14 @@
-# File Download
-if (( $+commands[curl] )); then
-  alias get='curl --continue-at - --location --progress-bar --remote-name --remote-time'
-elif (( $+commands[wget] )); then
-  alias get='wget --continue --progress=bar --timestamping'
-fi
-
-alias ls='eza -lA --header --icons=always --color=always --color-scale --color-scale-mode=gradient --group-directories-first --no-time --git --git-repos'
-
-### CAT & LESS
-command -v bat > /dev/null && \
-        alias bat='bat --theme=Dracula' && \
-        alias cat='bat --pager=never --theme=Dracula' && \
-        alias less='bat --theme=Dracula' && \
-        # using bat to colorize help pages && \
-        alias bathelp='bat --theme=Dracula --language=help' && \
-        alias help='"$@" --help 2>&1 | bathelp'
-
+alias curl='curl --continue-at - --location --progress-bar --remote-name --remote-time'
+alias wget='wget --continue --progress=bar --timestamping'
+alias aria2='aria2c -s16 -x16
+alias ls='eza -lhA --no-time --group-directories-first --icons=always --color=always'
+alias bat='bat --theme=Dracula' 
+alias cat='bat --pager=never --theme=Dracula'
+alias less='bat --theme=Dracula' 
+alias bathelp='bat --theme=Dracula --language=help'
+alias help='"$@" --help 2>&1 | bathelp'
+alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
+alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
+alias diff='diff --color=auto'
+alias grep='grep --color=auto'
+alias ip='ip -color=auto'
