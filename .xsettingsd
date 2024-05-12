@@ -1,4 +1,4 @@
-Net/DoubleClickTime 250
+lNet/DoubleClickTime 250
 Net/ThemeName "Dracula"
 Net/IconThemeName "Papirus-Dark"
 Net/SoundThemeName "Smooth"
@@ -12,40 +12,19 @@ Xft/RGBA "rgb"
 Xft/DPI 98304
 Xft/lcdfilter "lcddefault"
 
-Gtk/CanChangeAccels 1
+Gtk/CanChangeAccels true
 Gtk/FontName "MesloLGS Nerd Font 10"
-Gtk/IconSizes "gtk-menu
+Gtk/IconSizes "gtk-menu16,16;gtk-button16,16"
 # Gtk/KeyThemeName "Emacs"
-# Gtk/ToolbarStyle Icons
-# Gtk/ToolbarIconSize
-Gtk/IMModule ""
-Gtk/MenuImages 0
-Gtk/ButtonImages 0
+Gtk/ToolbarStyle "Icons"
+Gtk/ToolbarIconSize "SMALL_TOOLBAR"
+Gtk/IMModule "fcitx5"
+Gtk/MenuImages true
+Gtk/ButtonImages true
 Gtk/MenuBarAccel F10
-Gtk/CursorThemeName "Vanilla-DMZ"
+Gtk/CursorThemeName "ArchCursorComplete"
 Gtk/CursorThemeSize 32
 Gtk/FileChooserBackend "gio"
-
-# Setting: Gtk/ErrorBell
-# Description: ???
-# Type: boolean
-# Default: ???
 Gtk/ErrorBell 1
-
-# Setting: Gtk/Modules
-# Description: ???
-# Type: string
-# Default: ???
 # Gtk/Modules
-
-# Setting: Gtk/ShowInputMethodMenu
-# Description: ???
-# Type: boolean
-# Default: ???
-# Gtk/ShowInputMethodMenu
-
-# Setting: Gtk/ShowUnicodeMenu
-# Description: ???
-# Type: boolean
-# Default: ???
-# Gtk/ShowUnicodeMenu
+Gtk/ShowUnicodeMenu true
