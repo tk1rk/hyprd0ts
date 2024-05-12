@@ -1,25 +1,20 @@
 Net/DoubleClickTime 250
-# Net/DoubleClickDistance 5
-# Net/DndDragThreshold 8
-Net/CursorBlink 0
-# Net/CursorBlinkTime
-Net/ThemeName "NsCDE"
-Net/IconThemeName "NsCDE"
-# Net/FallbackIconTheme
-Net/EnableEventSounds 0
-Net/EnableInputFeedbackSounds 0
-# Net/SoundThemeName
+Net/ThemeName "Dracula"
+Net/IconThemeName "Papirus-Dark"
+Net/SoundThemeName "Smooth"
+Net/FallbackIconTheme "Papirus"
+Net/EnableEventSounds 1
+Net/EnableInputFeedbackSounds 1
 
 Xft/Hinting 1
 Xft/HintStyle "hintfull"
-# Xft/RGBA
+Xft/RGBA "rgb"
 Xft/DPI 98304
-Xft/lcdfilter "none"
+Xft/lcdfilter "lcddefault"
 
-# Gtk/CanChangeAccels
-# Gtk/ColorPalette
-Gtk/FontName "DejaVu Serif Book 10"
-# Gtk/IconSizes
+Gtk/CanChangeAccels 1
+Gtk/FontName "MesloLGS Nerd Font 10"
+Gtk/IconSizes "gtk-menu
 # Gtk/KeyThemeName "Emacs"
 # Gtk/ToolbarStyle Icons
 # Gtk/ToolbarIconSize
