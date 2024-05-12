@@ -3,7 +3,7 @@
 activities = ["my-default-activity", "my-activity"]
 
 # number of workspaces in x and y dimensions
-workspaces = [2, 2]
+workspaces = [2, 3]
 
 [daemon]
 # remember last focused workspace in an activity
