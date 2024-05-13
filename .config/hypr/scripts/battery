@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-bat="/sys/class/power_supply/BAT0/"
-per="$(cat "${bat}/capacity")"
+BAT="/sys/class/power_supply/BAT0/"
+per="$(cat "$bat/capacity")"
 chr="$(cat "$bat/status")"
 
 icon() {
