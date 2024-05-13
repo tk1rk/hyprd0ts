@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-BAT="/sys/class/power_supply/BAT0/"
+bat="/sys/class/power_supply/BAT0/"
 per="$(cat "$bat/capacity")"
 chr="$(cat "$bat/status")"
 
