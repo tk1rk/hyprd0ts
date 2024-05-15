@@ -1,0 +1,2 @@
+systemctl --user enable --now mako-watcher.service
+systemctl --user enable --now mako-watcher.path
