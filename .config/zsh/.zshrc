@@ -8,4 +8,8 @@ source $ZDOTDIR/conf.d/functions.zsh
 source $ZDOTDIR/plugins/auto-sized-fzf.sh
 source $ZDOTDIR/conf.d/autosuggestions.zsh
 
+function cd() {
+         builtin cd "$@" && command eza -lhA --no-time --group-directories-first --icons=always --color=always
+}
+alias ls='eza -lhA --no-time --group-directories-first --icons=always --color=always'
 
