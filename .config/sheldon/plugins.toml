@@ -52,4 +52,26 @@ bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 '''
 
+zmodule romkatv/powerlevel10k
+
+# zap plugins
+zmodule zap-zsh/supercharge
+zmodule zap-zsh/completions
+zmodule zap-zsh/sudo
+
+# misc
+zmodule hlissner/zsh-autopair
+zmodule marlonrichert/zsh-autocomplete
+
+# zsh-users plugins
+zmodule zsh-users/zsh-autosuggestions
+zmodule zsh-users/zsh-completions --fpath src
+zmodule completion
+zmodule zsh-users/zsh-history-substring-search
+
+# z-shell plugins
+zmodule z-shell/F-Sy-H
+zmodule z-shell/zsh-eza
+zmodule z-shell/zsh-fancy-completions
+zmodule z-shell/H-S-MW
 
