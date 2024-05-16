@@ -15,14 +15,16 @@ shell = "zsh"
 [plugins]
 
 [plugins.zsh-defer]
-apply = ["source"]
 github = "romkatv/zsh-defer"
 
 [templates]
 defer = "{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}{{ hooks?.pre | nl }}"
+PATH = 'export PATH="{{ dir }}:$PATH"'
+path = 'path=( "{{ dir }}" $path )'
+fpath = 'fpath=( "{{ dir }}" $fpath )'
 
 [plugins.compinit]
-inline = 'autoload -Uz compinit && zsh-defer compinit'
+inline = "autoload -Uz compinit && zsh-defer compinit"
 
 [plugins.zsh-autosuggestions]
 github = "zsh-users/zsh-autosuggestions"
@@ -30,10 +32,6 @@ apply = ["defer"]
 
 [plugins.zsh-syntax-highlighting]
 github = "zsh-users/zsh-syntax-highlighting"
-apply = ["defer"]
-
-[plugins.zsh-syntax-highlighting]
-github = "dracula/zsh-syntax-highlighting"
 apply = ["defer"]
 
 [plugins.zsh-autocomplete]
@@ -52,26 +50,19 @@ bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 '''
 
-zmodule romkatv/powerlevel10k
+[plugins.powerlevel10k]
+github = "romkatv/powerlevel10k"
 
-# zap plugins
-zmodule zap-zsh/supercharge
-zmodule zap-zsh/completions
-zmodule zap-zsh/sudo
+[plugins.zsh-completions]
+github = "zsh-users/zsh-completions"
+apply = ["fpath", "defer"]
 
-# misc
-zmodule hlissner/zsh-autopair
-zmodule marlonrichert/zsh-autocomplete
+[plugins.zsh-fancy-completions]
+github = "z-shell/zsh-fancy-completions"
+apply = ["fpath", "defer"]
 
-# zsh-users plugins
-zmodule zsh-users/zsh-autosuggestions
-zmodule zsh-users/zsh-completions --fpath src
-zmodule completion
-zmodule zsh-users/zsh-history-substring-search
+[plugins.H-S-MW]
+github = "z-shell/H-S-MW"
+apply = ["fpath", "defer"]
 
-# z-shell plugins
-zmodule z-shell/F-Sy-H
-zmodule z-shell/zsh-eza
-zmodule z-shell/zsh-fancy-completions
-zmodule z-shell/H-S-MW
 
