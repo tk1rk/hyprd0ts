@@ -17,23 +17,25 @@
     "modules-right": ["tray", "network", "pulseaudio", "bluetooth", "backlight", "battery", "clock", "custom/powermenu"],
     
     "hyprland/workspaces": {
-      "active-only":  false,
-      "all-outputs": true,
-      "on-click": "activate",
-      "format": "{icon}",
-      "format-icons": {
-	      "1": "",
-	      "2": "",
-	  	  "3": "",
-		      "4": "",
-		      "5": "",
-          "active": "󰮯",
-          "default": "",
-          "persistent": "",
-      },
-      "persistent-workspaces": {
-          "*": 5
-      }
+        "active-only":  false,
+        "all-outputs": true,
+        "disable-scroll": true,
+        "on-click": "activate",.
+        "on-click": "activate",
+        "format": "{icon}",
+        "format-icons": {
+	        "1": "",
+	        "2": "",
+	  	    "3": "",
+		    "4": "",
+		    "5": "",
+          	"active": "󰮯",
+          	"default": "",
+          	"persistent": "",
+      	},
+      	"persistent-workspaces": {
+          	"*": 5
+      	}
     },
     "tray": {
         "spacing": 6
@@ -43,6 +45,8 @@
     },
     "backlight": {
         "device": "intel_backlight",
+		"on-scroll-up": "brightnessctl set 1%+",
+        "on-scroll-down": "brightnessctl set 1%-",
         "format": "{icon}%",
         "format-icons": ["󱩎", "󱩏", "󱩑", "󱩒", "󱩓", "󱩔", "󱩕", "󱩖", "󰛨"]
     },
@@ -50,7 +54,8 @@
         "on-click": "blueman-applet",
 		"format": "",
 		"format-connected": "",
-		"format-connected-battery": ""
+		"format-connected-battery": "",
+		"format-disabled": ""
     },
     "network": {
         "format": "{icon}",
@@ -62,6 +67,8 @@
     },
     "pulseaudio": {
       	"on-click": "mixxc &",
+		"on-scroll-up": "$scriptDir/volume --inc",
+		"on-scroll-down": "$scriptDir/volume --dec",
         "format": "{icon}",
         "format-muted": "婢",
         "format-icons": {
