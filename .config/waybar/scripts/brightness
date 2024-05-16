@@ -1,38 +1,50 @@
 #!/usr/bin/env bash
 
-source "$HOME"/.local/bin/environment.sh
+iDIR="$HOME/.config/waybar/icons"
 
-# Get current brightness (in %)
-currentBrightness=$(brightnessctl i | awk '/Current brightness/ {gsub(/[(%)]/,""); print $NF}')
-
-function send_notification {
-
-    # Check if the current brightness is greater than or equal to 80
-    if [[ $currentBrightness -ge 80 ]]; then
-        # If it is, send a notification with the full brightness icon
-        notify-send -i "$icon_brightness_full" -u low -r 10 "Brightness: ${currentBrightness}%" "Are you ok?..."
-    # If the current brightness is between 40 and 80 (inclusive)
-    elif [[ $currentBrightness -ge 40 ]]; then
-        # Send a notification with the half brightness icon
-        notify-send -i "$icon_brightness_half" -u low -r 10 "Brightness: ${currentBrightness}%"
-    # If the current brightness is less than 40
-    else
-        # Send a notification with the low brightness icon
-        notify-send -i "$icon_brightness_low" -u low -r 10 "Brightness: ${currentBrightness}%"
-    fi
+# Get brightness
+get_backlight() {
+	echo $(brightnessctl -m | cut -d, -f4)
 }
 
+# Get icons
+get_icon() {
+	current=$(get_backlight | sed 's/%//')
+	if   [ "$current" -le "20" ]; then
+		icon="$iDIR/brightness-20.png"
+	elif [ "$current" -le "40" ]; then
+		icon="$iDIR/brightness-40.png"
+	elif [ "$current" -le "60" ]; then
+		icon="$iDIR/brightness-60.png"
+	elif [ "$current" -le "80" ]; then
+		icon="$iDIR/brightness-80.png"
+	else
+		icon="$iDIR/brightness-100.png"
+	fi
+}
+
+# Notify
+notify_user() {
+	notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$icon" "Brightness : $current%"
+}
+
+# Change brightness
+change_backlight() {
+	brightnessctl set "$1" && get_icon && notify_user
+}
+
+# Execute accordingly
 case "$1" in
-    up)
-        brightnessctl -q s +1%
-        send_notification
-        ;;
-    down)
-        if [ "$currentBrightness" -eq 1 ]; then
-            send_notification
-        else
-            brightnessctl -q s 1-%
-            send_notification
-        fi
-        ;;
+	"--get")
+		get_backlight
+		;;
+	"--inc")
+		change_backlight "+10%"
+		;;
+	"--dec")
+		change_backlight "10%-"
+		;;
+	*)
+		get_backlight
+		;;
 esac
