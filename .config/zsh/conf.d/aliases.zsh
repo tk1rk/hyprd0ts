@@ -1,7 +1,6 @@
 alias curl='curl --continue-at - --location --progress-bar --remote-name --remote-time'
 alias wget='wget --continue --progress=bar --timestamping'
 alias aria2='aria2c -s16 -x16
-alias ls='eza -lhA --no-time --group-directories-first --icons=always --color=always'
 alias bat='bat --theme=Dracula' 
 alias cat='bat --pager=never --theme=Dracula'
 alias less='bat --theme=Dracula' 
