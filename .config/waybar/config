@@ -38,7 +38,9 @@
       	}
     },
     "tray": {
-        "spacing": 6
+		"icon-size": 20,
+        "spacing": 6,
+		"show-passive-items: true
     },
     "clock": {
         "format": "{:%H:%M}"
@@ -52,16 +54,16 @@
     },
     "bluetooth": {
         "on-click": "blueman-applet",
-		"format": "",
-		"format-connected": "",
-		"format-connected-battery": "",
+		"format": "{icon}",
+		"format-connected": "<span color='#1793d1'></span>",
+		"format-connected-battery": "<span color='#1793d1'></span>",
 		"format-disabled": ""
     },
     "network": {
         "format": "{icon}",
-        "format-wifi": "直",
-        "format-ethernet": "",
-        "format-disconnected": "睊",
+        "format-wifi": "<span color='#1793d1'>直</span>",
+        "format-ethernet": "<span color='#1793d1'></span>",
+        "format-disconnected": "<span color='#f8f8f2'>睊</span>",
         "on-click": "nm-applet --indicator &",
         "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"]
     },
@@ -70,7 +72,7 @@
 		"on-scroll-up": "$scriptDir/volume --inc",
 		"on-scroll-down": "$scriptDir/volume --dec",
         "format": "{icon}",
-        "format-muted": "婢",
+        "format-muted": "<span color='#f8f8f2'>婢</span>",
         "format-icons": {
             "default": ["", "", "墳"],
         }
@@ -86,19 +88,21 @@
       	},
       	"max-length": 20,
       	"format": "{icon}%",
-      	"format-warning": "󱃌",
-     	"format-critical": "󱟩",
-      	"format-charging": "󰢞",
-      	"format-plugged": "󰚥", 
-      	"format-full": "󱊣", 
+      	"format-warning": "<span color='#f1fa8c'>󱃌</span>",
+     	"format-critical": "<span color='#ff5555'>󱟩</span>",
+      	"format-charging": "<span color='#50fa7b'>󰢞</span>",
+      	"format-plugged": "<span color='#50fa7b'>󰚥</span>", 
+      	"format-full": "<span color='#50fa7b'>󱊣</span>", 
       	"format-icons": ["󱊡", "󱊢", "󱊣"]
     },
     "custom/powermenu": {
-        "format": "󱄲",
+        "format": "<span color='#ff5555'>󱄲</span>",
         "on-click": "nwg-bar &"
     },
     "custom/launcher": {
-        "format": "",
+        "format": "<span color=''></span>",
         "on-click": "nwg-drawer &"
     }
 }
+
+
