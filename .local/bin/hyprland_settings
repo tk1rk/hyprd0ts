@@ -1,0 +1,16 @@
+#!/usr/bin/bash
+
+# git is required
+sudo pacman -S git
+
+# Change into your Downloads directory
+cd ~/Downloads
+
+# Clone the packages
+git clone --depth 1 https://gitlab.com/stephan-raabe/ml4w-hyprland-settings.git
+
+# Change into the folder
+cd ml4w-hyprland-settings
+
+# Start the script
+./install.sh
