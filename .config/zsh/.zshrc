@@ -25,11 +25,10 @@ mkdir -p "$ZSH_CACHE_DIR/completions"
 # function path ###
 fpath=($ZSH/functions $ZSH/completions $fpath)
 #---------------------------------------------------
-### Load all stock functions (from $fpath files) ###
+# Load all stock functions (from $fpath files) ###
 autoload -U compaudit compinit
 
-# Dracula syntax-highlighting ###
-###################################
+# Dracula syntax-highlighting 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main cursor)
 typeset -gA ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[comment]='fg=#6272A4'
@@ -85,9 +84,7 @@ ZSH_HIGHLIGHT_STYLES[arg0]='fg=#F8F8F2'
 ZSH_HIGHLIGHT_STYLES[default]='fg=#F8F8F2'
 ZSH_HIGHLIGHT_STYLES[cursor]='standout'
 
-###################
-### dracula tty ###
-###################
+# dracula tty 
 if [ "$TERM" = "linux" ]; then
     printf %b '\e[40m' '\e[8]' # set default background to color 0 'dracula-bg'
     printf %b '\e[37m' '\e[8]' # set default foreground to color 7 'dracula-fg'
@@ -110,8 +107,12 @@ if [ "$TERM" = "linux" ]; then
     clear
 fi
 
-###################
-### Dracula FZF ###
-######$$$$$$$$$$$$$
+# Dracula FZF 
 export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
+
+# sheldon
+eval "$(sheldon source)"
+
+# cargo
+source $HOME/.cargo/env
 
