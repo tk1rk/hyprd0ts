@@ -2,18 +2,18 @@
 
 # usage: import gtk-3.0 setting
 CONFIG="$XDG_CONFIG_HOME/gtk-3.0/settings.ini"
-# -----------------------------
+
 if [ ! -f "$CONFIG" ]; then 
     exit 1; 
 fi
 
 # Set GTK Themes, Icons, Cursor and Fonts
-gsettings set org.gnome.desktop.wm.preferences theme Dracula
-gsettings set org.gnome.desktop.interface gtk-theme Dracula
-gsettings set org.gnome.desktop.interface icon-theme Papirus-Dark
-gsettings set org.gnome.desktop.interface font-name "MesloLGS Nerd Font 12"
-gsettings set org.gnome.desktop.interface document-font-name "MesloLGS Nerd Font 12"
-gsettings set org.gnome.desktop.interface monospace-font-name "MesloLGS Nerd Font 12"
+gsettings set org.gnome.desktop.interface gtk-theme 'Dracula'
+gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
+gsettings set org.gnome.desktop.interface cursor-theme 'Catppuccin-Frappe-Mauve-Cursors'
+gsettings set org.gnome.desktop.interface font-name 'MesloLGS Nerd Font 12'
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 gsettings set org.gnome.desktop.interface menus-have-icons true
 gsettings set org.gnome.desktop.interface enable-animations true
- 
+gsettings set org.gnome.desktop.wm.preferences theme 'Dracula'
+
