@@ -5,7 +5,16 @@ source $ZDOTDIR/conf.d/aliases.zsh
 source $ZDOTDIR/conf.d/bindkeys.zsh
 source $ZDOTDIR/conf.d/completion.zsh
 source $ZDOTDIR/conf.d/functions.zsh
-source $ZDOTDIR/conf.d/autosuggestions.zsh
+
+# fish like Auto suggestion
+autoload predict-on
+predict-toggle() {
+  ((predict_on=1-predict_on)) && predict-on || predict-off
+}
+zle -N predict-toggle
+bindkey '^Z' predict-toggle
+zstyle ':predict' toggle true
+zstyle ':predict' verbose true
 
 # auto-ls
 function cd() {
@@ -110,9 +119,17 @@ fi
 # Dracula FZF 
 export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
 
+# autosuggestions
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(expand-or-complete bracketed-paste accept-line push-line-or-edit)
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#bd93f9,bold"
+
 # sheldon
 eval "$(sheldon source)"
 
 # cargo
 source $HOME/.cargo/env
 
+# p10k
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
