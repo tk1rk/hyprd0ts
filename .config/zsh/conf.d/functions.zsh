@@ -21,29 +21,10 @@ extract () {
 	done
 }
 
-cpp()
-{
-	set -e
-	strace -q -ewrite cp -- "${1}" "${2}" 2>&1 \
-	| awk '{
-	count += $NF
-	if (count % 10 == 0) {
-		percent = count / total_size * 100
-		printf "%3d%% [", percent
-		for (i=0;i<=percent;i++)
-			printf "="
-			printf ">"
-			for (i=percent;i<100;i++)
-				printf " "
-				printf "]\r"
-			}
-		}
-	END { print "" }' total_size="$(stat -c '%s' "${1}")" count=0
-}
 # colored output
 zmodload zsh/zpty
 # colored output for apps
-pty() {
+pty () {
 	zpty pty-${UID} ${1+$@}
 	if [[ ! -t 1 ]];then
 		setopt local_traps
@@ -52,14 +33,14 @@ pty() {
 	zpty -r pty-${UID}
 	zpty -d pty-${UID}
 }
+
 # colored output for less
-ptyless() {
+pless () {
 	pty $@ | less
 }
 
 # Copy file with a progress bar
-cpp()
-{
+cpp () {
 	set -e
 	strace -q -ewrite cp -- "${1}" "${2}" 2>&1 \
 	| awk '{
@@ -79,8 +60,7 @@ cpp()
 }
 
 # Copy and go to the directory
-cpg ()
-{
+cpg () {
 	if [ -d "$2" ];then
 		cp $1 $2 && cd $2
 	else
@@ -89,8 +69,7 @@ cpg ()
 }
 
 # Move and go to the directory
-mvg ()
-{
+mvg () {
 	if [ -d "$2" ];then
 		mv $1 $2 && cd $2
 	else
@@ -99,8 +78,7 @@ mvg ()
 }
 
 # Create and go to the directory
-mkdirg ()
-{
+mkdirg () {
 	mkdir -p $1
 	cd $1
 }
