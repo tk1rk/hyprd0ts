@@ -1,0 +1,149 @@
+{
+    "height": 34,
+    "layer": "top",
+    "name": "main-bar",
+    "id": "main-bar",
+    "position": "top",
+    "reload_style_on_change": 1,
+    "mod": "dock",
+    "exclusive": true,
+    "passtrough": false,
+    "gtk-layer-shell": true,
+    "fixed-center": true,
+    "ipc": true,
+    "modules-left": ["custom/launcher", "hyprland/workspaces"],
+    "modules-middle": ["hyprland/window"],
+    "modules-right": ["network", "pulseaudio",  "backlight", "battery", "bluetooth", "clock", "custom/powermenu"],
+
+    "hyprland/workspaces": {
+      "active-only": false, 
+      "all-outputs": true, 
+      "disable-scroll": false, 
+      "on-click": "activate",
+      "on-scroll-up": "hyprctl dispatch workspace +1", 
+      "on-scroll-down": "hyprctl dispatch workspace -1",
+      "format": "{icon}",
+      "format-icons": {
+        "active": "󰮯",
+        "default": "",
+	"persistent": ""
+      },
+      "persistent-workspaces":{
+        "*": 5 
+      }
+    },
+    "hyprland/window": {
+      "format": "[] = {initialClass}",
+      "separate-outputs": true
+    },
+    "backlight": {
+      "device": "intel_backlight",
+      "format": "{icon}",
+      "tooltip-format": "{percent}%",
+      "format-icons": ["󱩎", "󱩏", "󱩐", "󱩑", "󱩒", "󱩓", "󱩔", "󱩕", "󱩖", "󰛨"]
+    },
+    "bluetooth": {
+      "format": "<span color='#1793d1'></span>",
+      "format-connected": "<span color='#1793d1'></span>",
+      "format-connected-battery": "",
+      "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+      "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+      "tooltip-format-enumerate-connected":"{device_alias}\t{device_address}",
+      "tooltip-format-enumerate-connected-battery":"{device_alias}\t{device_address}\t{device_battery_percentage}%",
+      "on-click": "blueman-applet",
+      "on-click-right": "blueman-manager"
+    },
+    "battery": {
+      "bat": "BAT0",
+      "adapter": "ADP0",
+      "interval": 60,
+      "states": {
+	"good": 95,
+        "warning": 30,
+        "critical": 15,
+      },
+      "max-length": 20,
+      "format": "{icon}",
+      "format-warning": "<span color='#f1fa8c'>󱃌</span>",
+      "format-critical": "<span color='#ff5555'>󱃍</span>",
+      "format-charging": "<span color='#50fa7b'></span>",
+      "format-plugged": "<span color='#50fa7b'>󰚥</span>", 
+      "format-alt": "{percent}%",
+      "format-full": "<span color='#50fa7b'>󰂄</span>", 
+      "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    },
+    "clock": {
+      "interval": 1,
+      "format": "  {:%H:%M}",
+      "format-alt": "{:%A, %B %d, %Y %H:%M:%S } ",
+      "tooltip-format": "<tt><small>{calendar}</small></tt>",
+      "calendar": {
+        "mode"          : "month",
+        "weeks-pos"     : "right",
+        "on-scroll"     : 1,
+        "on-click-right": "mode",
+        "format": {
+          "months":     "<span color='#ffead3'><b>{}</b></span>",
+          "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+          "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+          "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+          "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+        }
+      }      
+    },
+    "custom/launcher": {
+      "format": "<span color='#1793d1'></span>",
+      "on-click": "nwggrid -client &"
+    },
+    "custom/notification": {
+      "tooltip": true,
+      "format": "{icon}",
+      "format-icons": {
+	"notification": "",
+        "none": "",
+        "dnd-notification": "",
+        "dnd-none": ",
+      },
+      "return-type": "json",
+      "exec-if": "which swaync-client",
+      "exec": "swaync-client -swb",
+      "on-click": "swaync-client -t -sw",
+      "on-click-right": "swaync-client -d -sw",
+      "escape": true
+    },
+    "custom/power": {
+      "format": "<span color='#ff5555'>󰚌</span>";,
+      "on-click": "nwg-bar &",
+    },
+    "custom/spotify": {
+      "exec": "python3 ~/.config/waybar/scripts/mediaplayer.py --player spotify",
+      "format": "<span color='#50fa7b'> {}</span>",
+      "return-type": "json",
+      "on-click": "playerctl play-pause --player spotify",
+      "on-double-click-right": "playerctl next --player spotify",
+      "on-scroll-down": "playerctl previous --player spotify"
+    },
+    "network": {
+      "format-wifi": "<span color='#1793d1'>󰖩</span>",
+      "format-ethernet": "<span color='#1793d1'>󰈀</span>",
+      "format-disconnected": "<span color='#f8f8f2'>󰖪</span>",
+      "tooltip-format": "{essid}",
+      "on-click": "nm-applet --indicator &",
+      "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"]
+    },
+    "pulseaudio": {
+      "format": "<span color='#50fa7b'>{icon}</span>",
+      "format-muted": "<span color='#f8f8f2.></span>",
+      "format-icons": {
+        "default": ["", "", ""]
+      },
+      "on-click": "pavucontrol &"
+    },
+    "tray": {
+      "spacing": 6,
+      "icon-size": 20,
+      "show-passive-items": true
+    },
+   
+
+}
