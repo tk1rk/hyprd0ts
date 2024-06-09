@@ -13,7 +13,7 @@
     "ipc": true,
     "modules-left": ["custom/launcher", "hyprland/workspaces"],
     "modules-middle": ["hyprland/window"],
-    "modules-right": ["network", "pulseaudio",  "backlight", "battery", "bluetooth", "clock", "custom/powermenu"],
+    "modules-right": ["custom/notifications", "custom/updates", "network", "pulseaudio",  "backlight", "battery", "bluetooth", "clock", "custom/power"],
 
     "hyprland/workspaces": {
       "active-only": false, 
@@ -26,7 +26,7 @@
       "format-icons": {
         "active": "󰮯",
         "default": "",
-	"persistent": ""
+				"persistent": ""
       },
       "persistent-workspaces":{
         "*": 5 
@@ -35,6 +35,23 @@
     "hyprland/window": {
       "format": "[] = {initialClass}",
       "separate-outputs": true
+    },
+    "clock": {
+      "interval": 1,
+      timezone": "America/Los_Angeles",
+      "format": "{:%I:%M %p}",
+      "format-alt": "{:%A, %d %B, %Y}",
+      "tooltip": true,
+      "tooltip-format": "<tt><small>{calendar}</small></tt>",
+      "calendar": {
+        "mode": "year",
+        "mode-mon-col": 3,
+        "weeks-pos": "right",
+        "format": {
+          "today": "<b><u>{}</u></b>",
+          "weeks": "W{}"
+        }
+      }
     },
     "backlight": {
       "device": "intel_backlight",
@@ -55,41 +72,26 @@
     },
     "battery": {
       "bat": "BAT0",
-      "adapter": "ADP0",
+      "interval": 1,
+      "bat-compatibility": true,
+      "weighted-average": true,
       "interval": 60,
       "states": {
-	"good": 95,
+				"good": 95,
         "warning": 30,
         "critical": 15,
       },
-      "max-length": 20,
-      "format": "{icon}",
-      "format-warning": "<span color='#f1fa8c'>󱃌</span>",
-      "format-critical": "<span color='#ff5555'>󱃍</span>",
-      "format-charging": "<span color='#50fa7b'></span>",
-      "format-plugged": "<span color='#50fa7b'>󰚥</span>", 
-      "format-alt": "{percent}%",
-      "format-full": "<span color='#50fa7b'>󰂄</span>", 
+      "format": "{capacity}% {icon}",
+			"format-time": "{H}:{M}",
+			"format-alt": "{time} {icon}",
+      "format-warning": "<span color='#f1fa8c'>{capacity}% 󱃌</span>",
+      "format-critical": "<span color='#ff5555'>{capacity}% 󱃍</span>",
+      "format-charging": "<span color='#50fa7b'>{capacity}% </span>",
+      "format-plugged": "<span color='#50fa7b'>{capacity}% 󰚥</span>",
+      "format-full": "<span color='#50fa7b'>{capacity}% 󰂄</span>", 
       "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
-    },
-    "clock": {
-      "interval": 1,
-      "format": "  {:%H:%M}",
-      "format-alt": "{:%A, %B %d, %Y %H:%M:%S } ",
-      "tooltip-format": "<tt><small>{calendar}</small></tt>",
-      "calendar": {
-        "mode"          : "month",
-        "weeks-pos"     : "right",
-        "on-scroll"     : 1,
-        "on-click-right": "mode",
-        "format": {
-          "months":     "<span color='#ffead3'><b>{}</b></span>",
-          "days":       "<span color='#ecc6d9'><b>{}</b></span>",
-          "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
-          "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
-          "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
-        }
-      }      
+			"tooltip": true,
+      "tooltip-format": "Capacity: {capacity}%\nPower: {power} W\n{timeTo}\nCharge Cycles: {cycles}\nHealth: {health}"
     },
     "custom/launcher": {
       "format": "<span color='#1793d1'></span>",
@@ -99,7 +101,7 @@
       "tooltip": true,
       "format": "{icon}",
       "format-icons": {
-	"notification": "",
+				"notification": "",
         "none": "",
         "dnd-notification": "",
         "dnd-none": ",
@@ -115,14 +117,6 @@
       "format": "<span color='#ff5555'>󰚌</span>";,
       "on-click": "nwg-bar &",
     },
-    "custom/spotify": {
-      "exec": "python3 ~/.config/waybar/scripts/mediaplayer.py --player spotify",
-      "format": "<span color='#50fa7b'> {}</span>",
-      "return-type": "json",
-      "on-click": "playerctl play-pause --player spotify",
-      "on-double-click-right": "playerctl next --player spotify",
-      "on-scroll-down": "playerctl previous --player spotify"
-    },
     "network": {
       "format-wifi": "<span color='#1793d1'>󰖩</span>",
       "format-ethernet": "<span color='#1793d1'>󰈀</span>",
@@ -132,12 +126,29 @@
       "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"]
     },
     "pulseaudio": {
-      "format": "<span color='#50fa7b'>{icon}</span>",
-      "format-muted": "<span color='#f8f8f2.></span>",
+      "scroll-step": 1,
+      "format": "{volume}% {icon} {format_source}",
+      "format-muted": " {format_source}",
+      "format-bluetooth": "{volume}% {icon}  {format_source}",
+      "format-bluetooth-muted": " {icon}  {format_source}",
+      "format-source": "{volume}% ",
+      "format-source-muted": "",
       "format-icons": {
-        "default": ["", "", ""]
+        "car": "",
+        "hands-free": "",
+        "headphone": "",
+        "headset": "",
+        "phone": "",
+        "portable": "",
+        "default": [
+          "",
+          "",
+          ""
+        ]
       },
-      "on-click": "pavucontrol &"
+      "tooltip": true,
+      "tooltip-format": "{desc}",
+      "on-click": "pavucontrol"
     },
     "tray": {
       "spacing": 6,
