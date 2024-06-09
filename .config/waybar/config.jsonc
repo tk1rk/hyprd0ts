@@ -38,7 +38,7 @@
     },
     "clock": {
       "interval": 1,
-      timezone": "America/Los_Angeles",
+      "timezone": "America/Los_Angeles",
       "format": "{:%I:%M %p}",
       "format-alt": "{:%A, %d %B, %Y}",
       "tooltip": true,
