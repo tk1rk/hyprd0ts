@@ -13,7 +13,7 @@
     "ipc": true,
     "modules-left": ["custom/launcher", "hyprland/workspaces"],
     "modules-middle": [],
-    "modules-right": ["custom/notifications", "custom/updates", "network", "pulseaudio",  "backlight", "battery", "bluetooth", "clock", "custom/power"],
+    "modules-right": ["custom/notifications", "custom/updates", "network", "custom/pipewire",  "backlight", "battery", "bluetooth", "clock", "custom/power"],
 
     "hyprland/workspaces": {
       "active-only": false, 
@@ -26,7 +26,7 @@
       "format-icons": {
         "active": "󰮯",
         "default": "",
-	"persistent": ""
+				"persistent": ""
       },
       "persistent-workspaces":{
         "*": 5 
@@ -36,6 +36,13 @@
       "format": "[] = {initialClass}",
       "separate-outputs": true
     },
+		"custom/pacman": {
+    	"format": "{}  ",
+    	"interval": "once",
+    	"exec": "pacman_packages",
+    	"on-click": "update-system",
+    	"signal": 8
+		},
     "clock": {
       "interval": 1,
       "timezone": "America/Los_Angeles",
@@ -125,8 +132,11 @@
       "on-click": "nm-applet --indicator &",
       "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"]
     },
-    "pulseaudio": {
-      "scroll-step": 1,
+    "custom/pipewire": {
+    	"max-length": 6,
+    	"exec": "$HOME/.config/waybar/scripts/pipewire.sh",
+    	"on-click": "pavucontrol",
+    	"on-click-right": "qpwgraph"
       "format": "{volume}% {icon} {format_source}",
       "format-muted": " {format_source}",
       "format-bluetooth": "{volume}% {icon}  {format_source}",
