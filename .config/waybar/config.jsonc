@@ -36,7 +36,7 @@
       "format": "[] = {initialClass}",
       "separate-outputs": true
     },
-		"custom/pacman": {
+    "custom/pacman": {
     	"format": "{}  ",
     	"interval": "once",
     	"exec": "pacman_packages",
@@ -62,7 +62,7 @@
     },
     "backlight": {
       "device": "intel_backlight",
-      "format": "{icon}",
+      "format": "{percent}% {icon}",
       "tooltip-format": "{percent}%",
       "format-icons": ["󱩎", "󱩏", "󱩐", "󱩑", "󱩒", "󱩓", "󱩔", "󱩕", "󱩖", "󰛨"]
     },
