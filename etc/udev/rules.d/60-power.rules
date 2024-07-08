@@ -1,2 +1,0 @@
-ACTION=="change", SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ATTR{online}=="0", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/tk/.Xauthority" RUN+="/usr/bin/su USERNAME -c '/home/tk/.local/bin/battery-charging discharging'"
-ACTION=="change", SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ATTR{online}=="1", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/tk/.Xauthority" RUN+="/usr/bin/su USERNAME -c '/home/tk/.local/bin/battery-charging charging'"
