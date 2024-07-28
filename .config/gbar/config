@@ -15,7 +15,7 @@
 # If true, gBar ignores *.scss files and only tries to load *.css files.
 # This is useful, if you don't want to SCSS, or if you want to use newer SCSS features,
 # that libsass (the backend gBar uses) doesn't support.
-ForceCSS: false
+ForceCSS: true
 
 # The following three options control the ordering of the widgets.
 # Reordering can cause slight margin inconsistencies,
@@ -27,7 +27,7 @@ WidgetsLeft: [Workspaces]
 # Widgets to center
 WidgetsCenter: [Time]
 # Widgets to display on the right side
-WidgetsRight: [Tray, Packages, Audio, Bluetooth, Network, Disk, Battery, Power]
+WidgetsRight: [Packages, Audio, Bluetooth, Network, Battery, Tray, Power]
 
 # The CPU sensor to use
 #CPUThermalZone: /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon2/temp1_input
@@ -40,7 +40,7 @@ WidgetsRight: [Tray, Packages, Audio, Bluetooth, Network, Disk, Battery, Power]
 #AmdGPUThermalZone: /device/hwmon/hwmon1/temp1_input
 
 # The command to execute on suspend
-SuspendCommand: systemctl hibernate -i
+SuspendCommand: hyprlock
 
 # The command to execute on lock
 LockCommand: hyprlock
@@ -62,34 +62,34 @@ DiskPartition: /
 WorkspaceSymbol: 1,󰮯
 
 # The default symbol for the workspaces
-DefaultWorkspaceSymbol: 󰊠
+DefaultWorkspaceSymbol: 
 
 # All of the icons that can be modified.
 # Please note that some icons require a space ("\s") (e.g. default ShutdownIcon)
 ShutdownIcon: \s
-RebootIcon: 󰑙
+RebootIcon: 
 SleepIcon: 󰤄
-LockIcon: 󰌾
+LockIcon: 
 ExitIcon: 󰿅
 BTOffIcon: 󰂲
-BTOnIcon: 
-BTConnectedIcon: 󰂱
+BTOnIcon: 
+BTConnectedIcon: 
 DevKeyboardIcon: 󰌌\s
 DevMouseIcon: 󰍽\s
-DevHeadsetIcon: \s
+DevHeadsetIcon: 󱡏\s
 DevControllerIcon: 󰮂\s
-DevUnknownIcon: \s
-SpeakerMutedIcon: 󰝟
-SpeakerHighIcon: 󰕾
-MicMutedIcon: 
-MicHighIcon: 
+DevUnknownIcon: \s
+SpeakerMutedIcon: 
+SpeakerHighIcon: 
+MicMutedIcon: 󰍭
+MicHighIcon: 󰢴
 PackageOutOfDateIcon: 󰮯\s
 
 # Scroll through the workspaces of the current monitor instead of all workspaces
 WorkspaceScrollOnMonitor: true
 
 # When true: Scroll up -> Next workspace instead of previous workspace. Analogous with scroll down
-WorkspaceScrollInvert: false
+WorkspaceScrollInvert: true
 
 # Number of workspaces to display. Displayed workspace IDs are 1-n (Default: 1-9)
 NumWorkspaces: 5
@@ -129,7 +129,7 @@ CenterSpace: 300
 DateTimeStyle: %a %D - %H:% %Z
 
 # Set datetime locale (defaults to system locale if not set or set to empty string)
-#DateTimeLocale: de_DE.utf8
+#DateTimeLocale: en_US.utf8
 
 # How many characters of the title can be displayed. Note that higher values *will* cause styling issues, especially when it is in the center.
 # If you have the title in the center, consider also increasing "CenterSpace"
@@ -139,7 +139,7 @@ MaxTitleLength: 30
 AudioInput: false
 
 # Sets the audio slider to be on reveal (Just like the sensors) when true. Only affects the bar.
-AudioRevealer: false
+AudioRevealer: true
 
 # Sets the rate of change of the slider on each scroll. In Percent
 AudioScrollSpeed: 5
@@ -158,8 +158,8 @@ CheckUpdateInterval: 300
 
 # Limits the range of the audio slider. Only works for audio output.
 # Slider "empty" is AudioMinVolume, Slider "full" is AudioMaxVolume
-# AudioMinVolume: 30 # Audio can't get below 30%
-# AudioMaxVolume: 120 # Audio can't get above 120%
+AudioMinVolume: 0 # Audio can't get below 30%
+AudioMaxVolume: 100 # Audio can't get above 120%
 
 # The network adapter to use. You can query /sys/class/net for all possible values
 NetworkAdapter: wlan0
@@ -187,15 +187,9 @@ EnableSNI: true
 # The wildcard filter '*' does not work for SNIIconName and SNIDisabled
 
 # Scale everything down to 25 pixels ('*' as filter means everything)
-#SNIIconSize: *, 25
-# Explicitly make OBS a bit smaller than default
-#SNIIconSize: OBS, 23
+#SNIIconSize: *, 20
 # Nudges the Discord icon a bit down
-#SNIPaddingTop: Discord, 5
-# Override the default icon given to gBar by discord to an icon theme supplied one (Example is from papirus theme)
-#SNIIconName: Discord, discord-tray
-# Prevents steam from displaying. Note: Steam doesn't have a tooltip, which means the object path is filtered instead.
-#SNIDisabled: steam, true
+SNIPaddingTop: *, 5
 
 # These set the range for the network widget. The widget changes colors at six intervals:
 #    - Below Min...Bytes ("under")
@@ -204,7 +198,7 @@ EnableSNI: true
 #    - Between ]50%;75%]. 0% = Min...Bytes; 100% = Max...Bytes ("mid-high")
 #    - Between ]75%;100%]. 0% = Min...Bytes; 100% = Max...Bytes ("high")
 #    - Above Max...Bytes ("over")
-MinDownloadBytes: 0
-MaxDownloadBytes: 10485760 # 10 * 1024 * 1024 = 10 MiB
-MinUploadBytes:   0
-MaxUploadBytes:   5242880    # 5 * 1024 * 1024 = 5 MiB
+#MinDownloadBytes: 0
+#MaxDownloadBytes: 10485760 # 10 * 1024 * 1024 = 10 MiB
+#MinUploadBytes:   0
+#MaxUploadBytes:   5242880    # 5 * 1024 * 1024 = 5 MiB
