@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-# colorize basic linux commands
-yay -Sy ccze cw cope-git grc rainbow colormake prettyping
