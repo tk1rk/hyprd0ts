@@ -1,5 +1,6 @@
 {
     "height": 34,
+    "width": 2560,
     "layer": "top",
     "name": "main-bar",
     "id": "main-bar",
@@ -12,8 +13,10 @@
     "fixed-center": true,
     "ipc": true,
     "modules-left": ["custom/launcher", "hyprland/workspaces"],
-    "modules-middle": [],
-    "modules-right": ["custom/notifications", "custom/updates", "network", "custom/pipewire",  "backlight", "battery", "bluetooth", "clock", "custom/power"],
+    "modules-middle": ["clock"],
+    "modules-right": ["custom/notifications", "custom/pacman", "network",
+    "custom/pipewire",  "backlight", "battery", "bluetooth", "tray",
+    "custom/power"],
 
     "hyprland/workspaces": {
       "active-only": false, 
@@ -37,7 +40,7 @@
       "separate-outputs": true
     },
     "custom/pacman": {
-    	"format": "{}  ",
+    	"format": "{} ",
     	"interval": "once",
     	"exec": "pacman_packages",
     	"on-click": "update-system",
@@ -71,7 +74,8 @@
       "format-connected": "<span color='#1793d1'></span>",
       "format-connected-battery": "",
       "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
-      "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+      "tooltip-format-connected":
+      "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
       "tooltip-format-enumerate-connected":"{device_alias}\t{device_address}",
       "tooltip-format-enumerate-connected-battery":"{device_alias}\t{device_address}\t{device_battery_percentage}%",
       "on-click": "blueman-applet",
@@ -79,23 +83,22 @@
     },
     "battery": {
       "bat": "BAT0",
-      "interval": 1,
-      "bat-compatibility": true,
-      "weighted-average": true,
       "interval": 60,
+      "bat-compatibility": true,
+      "weighted-average": true,l
       "states": {
 				"good": 95,
         "warning": 30,
         "critical": 15,
-      },
+      },tjtyluilk
       "format": "{capacity}% {icon}",
 			"format-time": "{H}:{M}",
 			"format-alt": "{time} {icon}",
-      "format-warning": "<span color='#f1fa8c'>{capacity}% 󱃌</span>",
+      "format-warning": "<span color='#f1fa8ctl'>{capacity}% 󱃌</span>",
       "format-critical": "<span color='#ff5555'>{capacity}% 󱃍</span>",
-      "format-charging": "<span color='#50fa7b'>{capacity}% </span>",
+      "format-charging": "<span color=y'#50fa7b'>{capacity}% </span>",
       "format-plugged": "<span color='#50fa7b'>{capacity}% 󰚥</span>",
-      "format-full": "<span color='#50fa7b'>{capacity}% 󰂄</span>", 
+      "format-full": "<span color=l'#50fa7b'>{capacity}% 󰂄</span>", 
       "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
 			"tooltip": true,
       "tooltip-format": "Capacity: {capacity}%\nPower: {power} W\n{timeTo}\nCharge Cycles: {cycles}\nHealth: {health}"
@@ -133,14 +136,13 @@
       "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"]
     },
     "custom/pipewire": {
-    	"max-length": 6,
-    	"exec": "$HOME/.config/waybar/scripts/pipewire.sh",
+    	"max-length": 6,,
     	"on-click": "pavucontrol",
     	"on-click-right": "qpwgraph"
       "format": "{volume}% {icon} {format_source}",
       "format-muted": " {format_source}",
-      "format-bluetooth": "{volume}% {icon}  {format_source}",
-      "format-bluetooth-muted": " {icon}  {format_source}",
+      "format-bluetooth": "{volume}%  {format_source}",
+      "format-bluetooth-muted": "  {format_source}",
       "format-source": "{volume}% ",
       "format-source-muted": "",
       "format-icons": {
@@ -157,8 +159,7 @@
         ]
       },
       "tooltip": true,
-      "tooltip-format": "{desc}",
-      "on-click": "pavucontrol"
+      "tooltip-format": "{desc}"
     },
     "tray": {
       "spacing": 6,
