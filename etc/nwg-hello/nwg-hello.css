@@ -1,5 +1,6 @@
 window {
-	background-image: url("/usr/share/nwg-hello/nwg.jpg"); background-size: 100% 100%
+	background-image: url("/usr/share/nwg-hello/nwg.jpg"); 
+	background-size: 100% 100%
 }
 
 #form-wrapper {
@@ -14,10 +15,8 @@ entry {
 }
 
 button {
-	background: none;
-	background-color: rgba(255, 255, 255, 0.1);
-	border: 1px solid #eee;
-	border-radius: 18px;
+	background-color: transparent;
+	border: none;
 	padding: 12px
 }
 
@@ -26,9 +25,15 @@ button:hover {
 }
 
 #power-button {
-	border-radius: 18px;
-    background:none;
-    border: none;
+	background-image: url("/usr/share/nwg-hello/power.png")
+}
+
+#reboot-button {
+	background-image: url("/usr/share/nwg-hello/reboot.png")
+}
+
+#sleep-button {
+	background-image: url("/usr/share/nwg-hello/sleep.png")
 }
 
 #power-button:hover {
@@ -36,7 +41,7 @@ button:hover {
 }
 
 #power-button:active {
-    background-color: rgba(255, 255, 0, 0.2)
+    background-color: rgba(80, 255, 123, 0.3)
 }
 
 #welcome-label {
@@ -53,14 +58,19 @@ button:hover {
 }
 
 #form-label {
+  font-size: 18px
 }
 
 #form-combo {
+  font-size: 18px
 }
 
 #password-entry {
+  font-size: 14px
 }
 
 #login-button {
-  background-color: rgba();
+  background-color: rgba(40, 42, 54, 0.8);
+  color: rgba(80, 250, 123, 0.8);
+  
 }
