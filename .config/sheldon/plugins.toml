@@ -1,15 +1,3 @@
-# `sheldon` configuration file
-# ----------------------------
-#
-# You can modify this file directly or you can use one of the following
-# `sheldon` commands which are provided to assist in editing the config file:
-#
-# - `sheldon add` to add a new plugin to the config file
-# - `sheldon edit` to open up the config file in the default editor
-# - `sheldon remove` to remove a plugin from the config file
-#
-# See the documentation for more https://github.com/rossmacarthur/sheldon#readme
-
 shell = "zsh"
 
 [plugins]
@@ -18,20 +6,24 @@ shell = "zsh"
 github = "romkatv/zsh-defer"
 
 [templates]
-defer = "{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}{{ hooks?.pre | nl }}"
-PATH = 'export PATH="{{ dir }}:$PATH"'
-path = 'path=( "{{ dir }}" $path )'
-fpath = 'fpath=( "{{ dir }}" $fpath )'
+defer = { value = 'zsh-defer source "{{ file }}"', each = true }
 
-[plugins.compinit]
-inline = "autoload -Uz compinit && zsh-defer compinit"
+[plugins.zsh-term-title]
+github = 'pawel-slowik/zsh-term-title'
 
-[plugins.zsh-autosuggestions]
-github = "zsh-users/zsh-autosuggestions"
-apply = ["defer"]
+[plugins.zsh-history-substring-search]
+github = 'zsh-users/zsh-history-substring-search'
+
+[plugins.gitstatus]
+github = 'romkatv/gitstatus'
+use = ['gitstatus.prompt.zsh']
 
 [plugins.zsh-syntax-highlighting]
 github = "zsh-users/zsh-syntax-highlighting"
+apply = ["defer"]
+
+[plugins.zsh-autosuggestions]
+github = "zsh-users/zsh-autosuggestions"
 apply = ["defer"]
 
 [plugins.zsh-autocomplete]
@@ -45,10 +37,10 @@ apply = ["defer"]
 [plugins.zsh-history-substring-search]
 github = "zsh-users/zsh-history-substring-search"
 apply = ["defer"]
-hooks.post = '''
+hooks.post = ['''
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
-'''
+''']
 
 [plugins.powerlevel10k]
 github = "romkatv/powerlevel10k"
@@ -63,6 +55,9 @@ apply = ["fpath", "defer"]
 
 [plugins.H-S-MW]
 github = "z-shell/H-S-MW"
-apply = ["fpath", "defer"]
+apply = ["defer"]
+
+[plugins.compinit]
+inline = "autoload -Uz compinit && zsh-defer compinit"
 
 
