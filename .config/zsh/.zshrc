@@ -5,7 +5,7 @@
 #source $ZDOTDIR/conf.d/functions.zsh
 
 setopt auto_cd
-
+setopt auto_pushd
 
 # Make sure $ZSH_CACHE_DIR is +x, else use dir in $HOME
 if [[ ! -w "$ZSH_CACHE_DIR" ]]; then
