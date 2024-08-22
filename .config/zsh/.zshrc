@@ -1,7 +1,8 @@
 # sources
-#source $ZDOTDIR/config
-#source $ZDOTDIR/
-#source $ZDOTDIR/
+#source $ZDOTDIR/conf.d/aliases.zsh
+#source $ZDOTDIR/conf.d/autosuggestions.zsh
+#source $ZDOTDIR/conf.d/dracula.zsh
+#source $ZDOTDIR/conf.d/functions.zsh
 
 setopt auto_cd
 
