@@ -33,6 +33,51 @@ if [[ ! -w "$ZSH_CACHE_DIR" ]]; then
 mkdir -p "$ZSH_CACHE_DIR/completions"
 (( ${fpath[(Ie)"$ZSH_CACHE_DIR/completions"]} )) || fpath=("$ZSH_CACHE_DIR/completions" $fpath)
 
+# try completion matching in order: smart-case, case-insensitive, partial-word, substring
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Z}{a-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+# use LS_COLORS for completion coloring
+[ -n "${LS_COLORS}" ] && zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
+
+kbind() {
+    local ti_name="$1"
+    local action="$2"
+    local tinfo="${terminfo[${ti_name}]}"
+    [ -n "${tinfo}" ] && bindkey "${tinfo}" "${action}"
+}
+
+# home
+kbind khome beginning-of-line
+
+# end
+kbind kend end-of-line
+
+# delete
+kbind kdch1 delete-char
+
+# shift-tab
+kbind kcbt reverse-menu-complete
+
+# up arrow
+kbind kcuu1 up-line-or-history
+
+# down arrow
+kbind kcud1 down-line-or-history
+
+# left arrow
+kbind kcub1 backward-char
+
+# right arrow
+kbind kcuf1 forward-char
+
+# ctrl-u
+bindkey "^U" backward-kill-line
+
+unfunction kbind
+
+
+
 # Load all stock functions (from $fpath files)
 autoload -U compaudit compinit
 
