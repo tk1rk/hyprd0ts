@@ -22,7 +22,7 @@ setopt inc_append_history
 
 # settings
 [ -z "${HISTFILE}" ] &&
-HISTFILE="${XDG_CACHE_HOME-:$HOME/.cache}/zsh/.zsh_history"
+HISTFILE="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/.zsh_history"
 HISTSIZE=120000
 SAVEHIST=100000
 
