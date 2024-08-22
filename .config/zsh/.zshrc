@@ -5,11 +5,6 @@
 
 setopt auto_cd
 
-# auto-ls
-function cd() {
-         builtin cd "$@" && command eza -lhA --no-time --group-directories-first --icons=always --color=always
-}
-alias ls='eza -lhA --no-time --group-directories-first --icons=always --color=always'
 
 # Make sure $ZSH_CACHE_DIR is +x, else use dir in $HOME
 if [[ ! -w "$ZSH_CACHE_DIR" ]]; then
