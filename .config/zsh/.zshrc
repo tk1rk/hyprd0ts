@@ -7,6 +7,14 @@
 setopt auto_cd
 setopt auto_pushd
 
+### completion
+setopt always_to_end
+setopt complete_in_word
+unsetopt list_beep
+
+zmodload zsh/complist
+
+
 # Make sure $ZSH_CACHE_DIR is +x, else use dir in $HOME
 if [[ ! -w "$ZSH_CACHE_DIR" ]]; then
   ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
