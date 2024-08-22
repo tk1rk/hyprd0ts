@@ -16,12 +16,19 @@ unsetopt list_beep
 
 zmodload zsh/complist
 
+### history
+setopt hist_expire_dups_first
+setopt inc_append_history
+
+# settings
+[ -z "${HISTFILE}" ] &&
+HISTFILE="${XDG_CACHE_HOME-:$HOME/.cache}/zsh/.zsh_history"
+HISTSIZE=120000
+SAVEHIST=100000
 
 # Make sure $ZSH_CACHE_DIR is +x, else use dir in $HOME
 if [[ ! -w "$ZSH_CACHE_DIR" ]]; then
-  ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
-fi
-#----------------------------------------------------
+  ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh
 # Create cache & comp dirs & + to $fpath 
 mkdir -p "$ZSH_CACHE_DIR/completions"
 (( ${fpath[(Ie)"$ZSH_CACHE_DIR/completions"]} )) || fpath=("$ZSH_CACHE_DIR/completions" $fpath)
