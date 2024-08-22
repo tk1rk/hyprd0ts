@@ -1,7 +1,7 @@
 # sources
-#source $ZDOTDIR/plugins
-#source $ZDOTDIR/plugins
-#source $ZDOTDIR/plugins
+#source $ZDOTDIR/config
+#source $ZDOTDIR/
+#source $ZDOTDIR/
 
 setopt auto_cd
 
