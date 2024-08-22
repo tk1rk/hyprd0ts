@@ -4,8 +4,10 @@
 #source $ZDOTDIR/conf.d/dracula.zsh
 #source $ZDOTDIR/conf.d/functions.zsh
 
+# directories
 setopt auto_cd
 setopt auto_pushd
+setopt pushd_ignore_dups
 
 ### completion
 setopt always_to_end
