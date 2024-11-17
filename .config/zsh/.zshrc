@@ -10,11 +10,11 @@ fi
 [[ -r ${ZDOTDIR}/functions.zsh ]] && source ${ZDOTDIR}/functions.zsh
 
 # Make sure $ZSH_CACHE_DIR is +x, else use dir in $HOME
-if [[ ! -w "$ZSH_CACHE_DIR" ]]; then
-  ZSH_CACHE_DIR="${XDG_CACHE_HOME}/zsh
+if [[ ! -w $ZSH_CACHE_DIR ]]; then
+  ZSH_CACHE_DIR=${XDG_CACHE_HOME}/zsh
 # Create cache & comp dirs & + to $fpath 
-mkdir -p "$ZSH_CACHE_DIR/completions"
-(( ${fpath[(Ie)"$ZSH_CACHE_DIR/completions"]} )) || fpath=("$ZSH_CACHE_DIR/completions" $fpath)
+mkdir -p $ZSH_CACHE_DIR/completions
+(( ${fpath[(Ie)$ZSH_CACHE_DIR/completions]} )) || fpath=("$ZSH_CACHE_DIR/completions" $fpath)
 
 autoload -Uz compinit
 zstyle ':completion:*' menu select
@@ -24,7 +24,7 @@ compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
 
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Z}{a-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
-[ -n "${LS_COLORS}" ] && zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+[ -n ${LS_COLORS} ] && zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
 export HISTSIZE=100000
 export SAVEHIST=20000
