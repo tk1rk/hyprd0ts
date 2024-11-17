@@ -11,7 +11,7 @@ fi
 
 # Make sure $ZSH_CACHE_DIR is +x, else use dir in $HOME
 if [[ ! -w "$ZSH_CACHE_DIR" ]]; then
-  ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh
+  ZSH_CACHE_DIR="${XDG_CACHE_HOME}/zsh
 # Create cache & comp dirs & + to $fpath 
 mkdir -p "$ZSH_CACHE_DIR/completions"
 (( ${fpath[(Ie)"$ZSH_CACHE_DIR/completions"]} )) || fpath=("$ZSH_CACHE_DIR/completions" $fpath)
@@ -32,7 +32,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Z}{a-z}' 'r:|
 # history
 export HISTSIZE=100000
 export SAVEHIST=20000
-export HISTFILE="$HOME/.cache/zsh/history"
+export HISTFILE=$HOME/.cache/zsh/history
 setopt hist_ignore_dups     # do not record an event that was just recorded again
 setopt hist_ignore_all_dups # delete an old recorded event if a new event is a duplicate
 setopt hist_ignore_space    # do not record an event starting with a space
