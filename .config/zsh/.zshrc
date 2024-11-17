@@ -16,20 +16,16 @@ if [[ ! -w "$ZSH_CACHE_DIR" ]]; then
 mkdir -p "$ZSH_CACHE_DIR/completions"
 (( ${fpath[(Ie)"$ZSH_CACHE_DIR/completions"]} )) || fpath=("$ZSH_CACHE_DIR/completions" $fpath)
 
-# tab autocompletions
 autoload -Uz compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 _comp_options+=(globdots)
 compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
 
-# try completion matching in order: smart-case, case-insensitive, partial-word, substring
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Z}{a-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
-# use LS_COLORS for completion coloring
 [ -n "${LS_COLORS}" ] && zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
-# history
 export HISTSIZE=100000
 export SAVEHIST=20000
 export HISTFILE=$HOME/.cache/zsh/history
@@ -40,28 +36,23 @@ setopt hist_save_no_dups    # do not write a duplicate event to the history file
 setopt inc_append_history   # write to the history file immediately, not when the shell exits
 setopt share_history        # share history between terminals
 
-# directories
 setopt auto_cd
 setopt auto_pushd
 setopt pushd_ignore_dups
 
-### completion
 setopt always_to_end
 setopt complete_in_word
 unsetopt list_beep
 
 zmodload zsh/complist
 
-# change word selection to exclude slashes
 autoload -U select-word-style
 select-word-style bash
 
-# cd to folder when quitting lf (terminal file manager)
 cd () {
 	      builtin cd "$@" && command eza -lhA --no-time --group-directories-first --icons=always --color=always
 }
 
-# this function is necessary for the foot terminal to be able to open new terminal to cwd
 autoload -U add-zsh-hook
 function osc7-pwd() {
 	emulate -L zsh
