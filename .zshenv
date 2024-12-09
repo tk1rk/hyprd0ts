@@ -60,6 +60,8 @@ fi
 # misc
 export WORDCHARS='~!#$%^&*(){}[]<>?.+;'  
 export GPG_TTY="$(tty)"
+export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"
+
 
 # ripgrep
 export RIPGREP_CONFIG_PATH="$HOME/.rgrc"
