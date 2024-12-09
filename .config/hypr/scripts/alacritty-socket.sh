@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 pgrep -x alacritty > /dev/null 2>&1 && {
   nohup alacritty msg create-window > /dev/null &
