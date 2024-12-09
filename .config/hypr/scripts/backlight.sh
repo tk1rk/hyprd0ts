@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Use brillo to naturally adjust laptop screen brightness and send a notification
 
