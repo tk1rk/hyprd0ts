@@ -10,10 +10,20 @@ fi
 # Set GTK Themes, Icons, Cursor and Fonts
 gsettings set org.gnome.desktop.interface gtk-theme 'Dracula'
 gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
+hyprctl setcursor ArchCursorComplete 24
 gsettings set org.gnome.desktop.interface cursor-theme 'Catppuccin-Frappe-Mauve-Cursors'
-gsettings set org.gnome.desktop.interface font-name 'MesloLGS Nerd Font 12'
+gsettings set org.gnome.desktop.interface cursor-size 24
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 gsettings set org.gnome.desktop.interface menus-have-icons true
 gsettings set org.gnome.desktop.interface enable-animations true
 gsettings set org.gnome.desktop.wm.preferences theme 'Dracula'
+kvantummanager --set Dracula
+gsettings set org.gnome.desktop.interface font-name 'MonoLisa Nerd Font 10'
+gsettings set org.gnome.desktop.interface document-font-name 'MonoLisa Nerd Font Regular 10'
+gsettings set org.gnome.desktop.interface monospace-font-name 'MonoLisa Nerd Font 9'
+gsettings set org.gnome.desktop.interface font-antialiasing 'rgba'
+gsettings set org.gnome.desktop.interface font-hinting 'full'
+
+export XCURSOR_THEME=ArchCursorComplete
+export XCURSOR_SIZE=32
 
