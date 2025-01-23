@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+export ZDOTDIR=$HOME/.config/zsh
+export ZCACHE=$HOME/.cache/zsh
+export ZCOMPLETION=$ZCACHE/completions
+export ZCONF=$ZDOTDIR/conf.d
+export ZPLUGINS=$ZDOTDIR/plugins
