@@ -16,15 +16,11 @@ if [[ ! -w $ZSH_CACHE_DIR ]]; then
 mkdir -p $ZSH_CACHE_DIR/completions
 (( ${fpath[(Ie)$ZSH_CACHE_DIR/completions]} )) || fpath=("$ZSH_CACHE_DIR/completions" $fpath)
 
-autoload -Uz compinit
-zstyle ':completion:*' menu select
-zmodload zsh/complist
-_comp_options+=(globdots)
-compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
-
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Z}{a-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-
-[ -n ${LS_COLORS} ] && zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+#autoload -Uz compinit
+#zstyle ':completion:*' menu select
+#zmodload zsh/complist
+#_comp_options+=(globdots)
+#compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
 
 export HISTSIZE=100000
 export SAVEHIST=20000
@@ -68,42 +64,108 @@ add-zsh-hook -Uz chpwd chpwd-osc7-pwd
 # fix vi plugin conflicting with fzf
 export ZVM_INIT_MODE=sourcing
 
-# basic plugin manager to automatically import zsh plugins
-# script by mattmc3 from https://github.com/mattmc3/zsh_unplugged
-# clone a plugin, identify its init file, source it, and add it to your fpath
-function plugin-load {
-	local repo plugdir initfile initfiles=()
-	: ${ZPLUGINDIR:=${ZDOTDIR:-~/.config/zsh}/plugins}
-	for repo in $@; do
-		plugdir=$ZPLUGINDIR/${repo:t}
-		initfile=$plugdir/${repo:t}.plugin.zsh
-		if [[ ! -d $plugdir ]]; then
-			echo "Cloning $repo..."
-			git clone -q --depth 1 --recursive --shallow-submodules \
-				https://github.com/$repo $plugdir
-		fi
-		if [[ ! -e $initfile ]]; then
-			initfiles=($plugdir/*.{plugin.zsh,zsh-theme,zsh,sh}(N))
-			(( $#initfiles )) || { echo >&2 "No init file '$repo'." && continue }
-			ln -sf $initfiles[1] $initfile
-		fi
-		fpath+=$plugdir
-		(( $+functions[zsh-defer] )) && zsh-defer . $initfile || . $initfile
-	done
+```zsh
+# zsh plugin manager
+
+# Configuration
+ZPM_DIR="${ZPM_DIR:-$HOME/.zpm}"
+ZPM_PLUGINS_DIR="${ZPM_PLUGINS_DIR:-$ZPM_DIR/plugins}"
+ZPM_CACHE_FILE="${ZPM_CACHE_FILE:-$ZPM_DIR/cache.json}"
+
+# Functions
+
+# Install plugin
+zpm_install() {
+  local plugin="$1"
+  local url="$2"
+  local name
+  name=$(basename "$url" .git)
+
+  if [[ -d "$ZPM_PLUGINS_DIR/$name" ]]; then
+    echo "Plugin '$name' already installed."
+    return 1
+  fi
+
+  mkdir -p "$ZPM_PLUGINS_DIR/$name"
+  git clone "$url" "$ZPM_PLUGINS_DIR/$name"
+
+  # Cache plugin info (optional)
+  # ...
+
+  echo "Plugin '$name' installed."
+  return 0
 }
 
-# list of github repos of plugins
-repos=(
-	romkatv/powerlevel10k
-  marlonrichert/zsh-autocomplete
-  zsh-users/zsh-history-substring-search
-  hlissner/zsh-autopair
-	romkatv/zsh-defer
-	zsh-users/zsh-autosuggestions
-	zdharma-continuum/fast-syntax-highlighting
-	kazhala/dotbare
-)
-plugin-load $repos
+# Update plugin
+zpm_update() {
+  local plugin="$1"
+  local path="$ZPM_PLUGINS_DIR/$plugin"
+
+  if [[ ! -d "$path" ]]; then
+    echo "Plugin '$plugin' not found."
+    return 1
+  fi
+
+  git pull "$path"
+  echo "Plugin '$plugin' updated."
+  return 0
+}
+
+# List plugins
+zpm_list() {
+  ls "$ZPM_PLUGINS_DIR"
+}
+
+# Load plugins (in .zshrc)
+zpm_load() {
+  local plugin
+  for plugin in "$@"; do
+    if [[ -f "$ZPM_PLUGINS_DIR/$plugin/$plugin.zsh" ]]; then
+      source "$ZPM_PLUGINS_DIR/$plugin/$plugin.zsh"
+    elif [[ -f "$ZPM_PLUGINS_DIR/$plugin/init.sh" ]]; then
+      source "$ZPM_PLUGINS_DIR/$plugin/init.sh"
+    else
+      echo "No loadable file found for plugin '$plugin'."
+    fi
+  done
+}
+
+# Example usage (in .zshrc):
+# zpm_install oh-my-zsh/oh-my-zsh https://github.com/oh-my-zsh/oh-my-zsh.git
+# zpm_load oh-my-zsh
+zpm_install zsh-users/zsh-syntax-highlighting https://github.com/zsh-users/zsh-syntax-highlighting.git
+zpm_load zsh-syntax-highlighting
+zpm_install zsh-users/zsh-autosuggestions https://github.com/zsh-users/zsh-autosuggestions.git
+zpm load zsh-users/zsh-autosuggestions 
+zpm_install zsh-users/zsh-completions https://github.com/zsh-users/zsh-completions.git
+zpm load zsh-users/zsh-completions
+zpm_install zsh-users/zsh-history-substring-search https://github.com/zsh-users/zsh-history-substring-search.git
+zpm load zsh-users/zsh-hostiry-subtring-search
+zpm_install hlissner/zsh-autopair https://github.com/hlissner/zsh-autopair.git
+zpm load hlissner/zsh-autopair
+zpm_install marlonrichert/zsh-autocomplete https://github.com/marlonrichert/zsh-autocomplete.git
+zpm load marlonrichert/zsh-autocomplete
+zpm_install z-shell/F-Sy-H https://github.com/z-shell/F-Sy-H.git
+zpm load z-shell/F-Sy-H
+zpm_install z-shell/zsh-fancy-completions https://github.com/z-shell/zsh-fanvy-completions.git
+zpm load z-shell/zsh-fancy-completions
+
+# Add functions to fpath
+fpath=("$ZPM_DIR/functions" $fpath)
+autoload -Uz zpm_install zpm_update zpm_list zpm_load
+
+# Create functions directory
+mkdir -p "$ZPM_DIR/functions"
+
+# Example function (put in $ZPM_DIR/functions/zpm_help)
+zpm_help() {
+  echo "ZPM - Zsh Plugin Manager"
+  echo "Usage: zpm_install <plugin> <url>"
+  echo "       zpm_update <plugin>"
+  echo "       zpm_list"
+  echo "       zpm_load <plugin>..."
+}
+```
 
 # fzf in terminal, fzf must be installed to use this
 eval "$(fzf --zsh)"
@@ -112,8 +174,8 @@ export FZF_DEFAULT_OPTS=" \
 --color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 \
 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 \
 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 \
---color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
+--color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4"
 
 
 # to customize prompt, run `p10k configure`
-[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~//.config/zsh/.p10k.zsh
