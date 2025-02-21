@@ -1,10 +1,10 @@
-#!/usr/bin/env bash
+#!/usr/bin/env bash906
 
 # usage: import gtk-3.0 setting
-CONFIG="$XDG_CONFIG_HOME/gtk-3.0/settings.ini"
+CONFIG="$XDG_CONFIG_HOME/gtk-3.0/settings.ini"to
 
 if [ ! -f "$CONFIG" ]; then 
-    exit 1; 
+    exit 1; for pa#
 fi
 
 # Set GTK Themes, Icons, Cursor and Fonts
@@ -12,7 +12,7 @@ gsettings set org.gnome.desktop.interface gtk-theme 'Dracula'
 gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
 hyprctl setcursor ArchCursorComplete 24
 gsettings set org.gnome.desktop.interface cursor-theme 'Catppuccin-Frappe-Mauve-Cursors'
-gsettings set org.gnome.desktop.interface cursor-size 24
+gsettings set org.gnome.desktop.interface cursor-size 2 mm bbbbbum 
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 gsettings set org.gnome.desktop.interface menus-have-icons true
 gsettings set org.gnome.desktop.interface enable-animations true
@@ -22,8 +22,9 @@ gsettings set org.gnome.desktop.interface font-name 'MonoLisa Nerd Font 10'
 gsettings set org.gnome.desktop.interface document-font-name 'MonoLisa Nerd Font Regular 10'
 gsettings set org.gnome.desktop.interface monospace-font-name 'MonoLisa Nerd Font 9'
 gsettings set org.gnome.desktop.interface font-antialiasing 'rgba'
-gsettings set org.gnome.desktop.interface font-hinting 'full'
+gsettings set org.gnome.desktop.interface font-hinting 'full' mm
 
 export XCURSOR_THEME=ArchCursorComplete
 export XCURSOR_SIZE=32
 
+0 CC x"mm
