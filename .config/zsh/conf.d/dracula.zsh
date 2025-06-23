@@ -13,7 +13,8 @@ export GROFF_NO_SGR=1                   # for konsole
 export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
 
 # Dracula syntax-highlighting 
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main cursor)
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main)
+ZSH_HIGHLIGHT_HIGHLIGHTERS+=(brackets pattern cursor)
 typeset -gA ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[comment]='fg=#6272A4'
 ZSH_HIGHLIGHT_STYLES[alias]='fg=#50FA7B'
@@ -90,6 +91,3 @@ if [ "$TERM" = "linux" ]; then
     printf %b '\e]PFffffff'    # redefine 'bright-white'   as '#ffffff'
     clear
 fi
-
-# Dracula FZF 
-export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
