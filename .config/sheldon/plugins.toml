@@ -1,0 +1,93 @@
+# A list of glob patterns to match against a plugin's contents.
+# The first pattern that matches any files will be used by default as a plugin's use field.
+match = [
+  "{{ name }}.plugin.zsh",
+  "{{ name }}.zsh",
+  "{{ name }}.sh",
+  "{{ name }}.zsh-theme",
+  "*.plugin.zsh",
+  "*.zsh",
+  "*.sh",
+  "*.zsh-theme",
+]
+
+# Global templates to apply by default, if a plugin doesn't provide an `apply`
+# field then these will be used.
+apply = ["source"]
+
+# Custom user defined templates, the `each` field means that these will be
+# applied for all matched files.
+[templates]
+# Generic templates
+source  = { value = 'source "{{ filename }}"', each = true }
+fpath = 'fpath=( "{{ directory }}" $fpath )'
+PATHBIN = 'export PATH="{{ directory }}/bin:$PATH"'
+# Templates specific for plugins
+compinit = 'autoload -U compinit && compinit'
+dircolors = 'dircolors -b "{{ directory }}/LS_COLORS" > "{{ directory }}/LS_COLORS.plugin.zsh"; source "{{ directory }}/LS_COLORS.plugin.zsh"'
+abbrev-alias-init = 'abbrev-alias --init'
+autopair = 'typeset -gA AUTOPAIR_PAIRS; AUTOPAIR_PAIRS+=("<" ">")'
+auto-notify = 'AUTO_NOTIFY_THRESHOLD=20'
+
+# Highlight words
+[plugins.fast-syntax-highlighting]
+github = "zdharma/fast-syntax-highlighting"
+
+# Search in substrings
+[plugins.history-substring-search]
+github = "zsh-users/zsh-history-substring-search"
+
+# Autosuggestions
+[plugins.autosuggestions]
+github = "zsh-users/zsh-autosuggestions"
+
+# Additional completion definitions
+[plugins.completions]
+github = "zsh-users/zsh-completions"
+apply = ["source", "compinit"]
+
+# Colorize ls
+[plugins.ls-colors]
+github = "trapd00r/LS_COLORS"
+apply = ["dircolors"]
+
+# Colorize man pages
+[plugins.colored-man-pages]
+github = "ael-code/zsh-colored-man-pages"
+
+# Auto-close and delete matching delimiters
+[plugins.autopair]
+github = "hlissner/zsh-autopair"
+apply = ["autopair", "source"]
+
+# Enable expanding abbreviations
+[plugins.abbrev-alias]
+github = "momo-lab/zsh-abbrev-alias"
+apply = ["source", "abbrev-alias-init"]
+
+# Automatically send out a notification when a long running task has completed
+[plugins.auto-notify]
+github = "MichaelAquilina/zsh-auto-notify"
+apply = ["auto-notify", "source"]
+
+# Install diff-so-fancy and enables git subcommand git dsf
+[plugins.diff-so-fancy]
+github = "zdharma/zsh-diff-so-fancy"
+apply = ["PATHBIN", "source"]
+
+[plugins.forgit]
+github = "wfxr/forgit"
+
+# ZSH normalization by Fizzy team!
+[plugins.normalize]
+git = "https://gitlab.com/fizzycfg/support-cfg/zsh-normalize"
+apply = ["fpath", "source"]
+
+[plugins.external-tools]
+git = "https://gitlab.com/fizzycfg/support-cfg/zsh-external-tools"
+
+#  zgen load Tarrasch/zsh-bd # Jump back to a specific directory.
+#  zgen load uvaes/fzf-marks # Bookmarks (searchable with fzf).
+#  zgen load wookayin/fzf-fasd # Open fzf's recent directories with fzf.
+
+# direnv lo installiamo a parte e poi lo integriamo in zsh-external-tools. C'è anche plugin per integrarlo con fasd

@@ -6,8 +6,18 @@ fi
 # to set truecolor
 [[ "$COLORTERM" == (24bit|truecolor) || "${terminfo[colors]}" -eq '16777216' ]] || zmodload zsh/nearcolor
 
+# Define the directory containing your configuration splits
+ZSH_CONFIG_DIR="$HOME/.config/zsh/conf.d"
+
+# Loop through and source each file if the directory exists
+if [ -d "$ZSH_CONFIG_DIR" ]; then
+  for file in "$ZSH_CONFIG_DIR"/*.{sh,zsh}(ND); do
+    [ -f "$file" ] && source "$file"
+  done
+fi
+
 # promptinit
-/usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # autols
 function cd () {

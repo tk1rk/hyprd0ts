@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 export XDG_BIN_HOME=${XDG_BIN_HOME:-$HOME/.local/bin}
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
