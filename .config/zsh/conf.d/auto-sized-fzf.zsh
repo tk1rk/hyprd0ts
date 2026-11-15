@@ -1,6 +1,4 @@
-#!/usr/bin/sh
-
-# -- check to see if we were sourced --
+#!/usr/bin/zsh
 
 (
   [[ -n $ZSH_VERSION && $ZSH_EVAL_CONTEXT =~ :file$ ]] || 
