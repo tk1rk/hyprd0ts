@@ -7,24 +7,38 @@ fi
 [[ "$COLORTERM" == (24bit|truecolor) || "${terminfo[colors]}" -eq '16777216' ]] || zmodload zsh/nearcolor
 
 # Define the directory containing your configuration splits
-ZSH_CONFIG_DIR="$HOME/.config/zsh/conf.d"
+export ZDOTDIR=$HOME/.config/zsh
+export ZCACHE=$HOME/.cache/zsh
+export ZCONFIG=$ZDOTDIR/conf.d
+export ZPLUGIN=$ZDOTDIR/plugins
 
 # Loop through and source each file if the directory exists
-if [ -d "$ZSH_CONFIG_DIR" ]; then
-  for file in "$ZSH_CONFIG_DIR"/*.{sh,zsh}(ND); do
+if [ -d "$ZCONFIG" ]; then
+  for file in "ZCONFIG/*.{sh,zsh}(ND); do
     [ -f "$file" ] && source "$file"
   done
 fi
 
 # promptinit
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+source ~/powerlevel10k/powerlevel10k.zsh-theme
+
+# defer
+source $ZPLUGIN/zsh-defer/zsh-defer.plugin.zsh
+
+# zsh plugins
+zsh-defer source $ZPLUGIN/zsh-autopair/zsh-autopair.plugin.zsh
+zsh-defer source $ZPLUGIN/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+zsh-defer source $ZPLUGIN/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+zsh-defer source $ZPLUGIN/zsh-completions/zsh-completions.plugin.zsh
+zsh-defer source $ZPLUGIN/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+zsh-defer source $ZPLUGIN/H-S-MW/H-S-MW.plugin.zsh
+zsh-defer source $ZPLUGIN/zsh-history-substring-search/zsh-history-substring-search.plugin.zsh
 
 # autols
 function cd () {
 	      builtin cd "$@" && command eza -lhA --no-time --group-directories-first --icons=always --color=always
 }
 alias ls="eza -lhA --no-time --group-directories-first --icons=always --color=always"
-
 
 # fzf in terminal, fzf must be installed to use this
 eval "$(fzf --zsh)"
@@ -36,6 +50,8 @@ export FZF_DEFAULT_OPTS=" \
 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 \
 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4"
 
+# ls-colors
+export LS_COLORS="$(vivid generate dracula)"
 
 # to customize prompt, run `p10k configure`
-[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~//.config/zsh/.p10k.zsh
+[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
