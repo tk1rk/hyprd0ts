@@ -12,12 +12,10 @@ export ZCACHE=$HOME/.cache/zsh
 export ZCONFIG=$ZDOTDIR/conf.d
 export ZPLUGIN=$ZDOTDIR/plugins
 
-# Loop through and source each file if the directory exists
-if [ -d "$ZCONFIG" ]; then
-  for file in "ZCONFIG/*.{sh,zsh}(ND); do
-    [ -f "$file" ] && source "$file"
-  done
-fi
+# zsh config sources
+for file in ~/.config/zsh/conf.d/*.zsh(N); do
+    source "$file"
+done
 
 # promptinit
 source ~/powerlevel10k/powerlevel10k.zsh-theme
