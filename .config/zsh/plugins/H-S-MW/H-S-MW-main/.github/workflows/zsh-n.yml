@@ -1,0 +1,36 @@
+---
+name: Zsh Syntax Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  zsh-n:
+    name: Zsh Syntax Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Zsh
+        uses: z-shell/.github/actions/setup-zsh@9c96960532066b8686b0bf74628f859990a9231b # main
+      - name: Check Zsh syntax and compilation
+        run: |
+          output="$RUNNER_TEMP/zwc"
+          mkdir -p "$output"
+          find . -type f \( -name '*.zsh' -o -path './functions/*' \) -print | sort | while read -r file; do
+            zsh -f -n "$file"
+            zsh -f -c 'zcompile -U -z -- "$2" "$1"' zsh "$file" "$output/$(basename "$file").zwc"
+          done
