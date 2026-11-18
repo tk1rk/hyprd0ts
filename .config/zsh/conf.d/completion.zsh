@@ -3,7 +3,10 @@ autoload -U colors && colors
 
 zmodload -i zsh/complist
 
-zstyle ':completion:*' completer _expand _complete _match _approximate
+#zstyle ':completion:*' completer _expand _complete _match _approximate
+zstyle ':completion:*' completer \
+    _expand _complete _complete:-loose _complete:-fuzzy _ignored
+zstyle ':autocomplete:*' min-input 1
 zstyle ':completion:*:match:*' original only
 zstyle -e ':completion:*:approximate:*' max-errors \
   'reply=($((($#PREFIX + $#SUFFIX) / 3 > 7 ? 7 : ($#PREFIX + $#SUFFIX) / 3))numeric)'
