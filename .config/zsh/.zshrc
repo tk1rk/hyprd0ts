@@ -14,9 +14,13 @@ export XDG_STATE_HOME=${XDG_STATE_HOME:-$HOME/.local/state}
 
 # Define the directory containing your configuration splits
 export ZDOTDIR=${ZDOTDIR:-$HOME/.config/zsh}
+[[ -d "$ZDOTDIR" ]] || mkdir -p "$ZDOTDIR"
 export ZCACHE=${XDG_CACHE_HOME;-$HOME/.cache}/zsh
+[[ -d "$ZCACHE" ]] || mkdir -p "$ZCACHE"
 export ZCONFIG=${ZDOTDIR:-$HOME/.config/zsh}/conf.d
+[[ -d "$ZCONFIG" ]] || mkdir -p "$ZCONFIG"
 export ZPLUGIN=${ZDOTDIR:-$HOME/.config/zsh}/plugins
+[[ -d "$ZPLUGIN" ]] || mkdir -p "$ZPLUGIN"
 
 # promptinit
 source ~/powerlevel10k/powerlevel10k.zsh-theme
