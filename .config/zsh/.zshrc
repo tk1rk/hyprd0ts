@@ -28,10 +28,10 @@ autoload -Uz $ZPLUGIN/zsh-defer/zsh-defer.plugin.zsh
 zsh-defer source $ZPLUGIN/zsh-autopair/zsh-autopair.plugin.zsh
 zsh-defer source $ZPLUGIN/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 zsh-defer source $ZPLUGIN/zsh-completions/zsh-completions.plugin.zsh
-zsh-defer source $ZPLUGIN/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 zsh-defer source $ZPLUGIN/H-S-MW/H-S-MW.plugin.zsh
 zsh-defer source $ZPLUGIN/zsh-history-substring-search/zsh-history-substring-search.plugin.zsh
 zsh-defer source $ZPLUGIN/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+zsh-defer source $ZPLUGIN/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 
 # zsh config sources
 for file in $HOME/config/zsh/conf.d/*.zsh(N); do
